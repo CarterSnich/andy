@@ -1,0 +1,220 @@
+.image-5-icon4 {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: scale(1.059);
+  }
+  .wrapper-image-53 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 1024px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .librarian-page-inner {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    background-color: var(--color-darkslateblue);
+    width: 1439px;
+    height: 158px;
+    cursor: pointer;
+  }
+  .image-4-icon2 {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: scale(1.174);
+  }
+  .wrapper-image-41 {
+    position: absolute;
+    top: 20px;
+    left: 39px;
+    border-radius: var(--br-139xl);
+    width: 115px;
+    height: 115px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .library-management-system5 {
+    position: absolute;
+    top: 56px;
+    left: 205px;
+    font-size: var(--font-size-29xl);
+    font-weight: 600;
+    color: var(--color-white);
+  }
+  .librarian-page-child1 {
+    position: absolute;
+    top: 195px;
+    left: 0;
+    background-color: #1c1e60;
+    width: 1440px;
+    height: 829px;
+  }
+  .transaction1 {
+    position: absolute;
+    top: 229px;
+    left: 35px;
+    font-size: var(--font-size-17xl);
+    display: inline-block;
+    color: var(--color-white);
+    width: 239px;
+    height: 45px;
+  }
+  .librarian-page-child2 {
+    position: absolute;
+    top: 280px;
+    left: 35px;
+    background-color: var(--color-white);
+    width: 1381px;
+    height: 696px;
+  }
+  .librarian-page-child3,
+  .librarian-page-child4 {
+    position: absolute;
+    top: 280px;
+    left: 35px;
+    width: 1381px;
+    height: 86px;
+  }
+  .librarian-page-child4 {
+    top: 372px;
+    border: 2px solid var(--color-black);
+    box-sizing: border-box;
+  }
+  .amount,
+  .buy-book {
+    position: absolute;
+    top: 293px;
+    left: 54px;
+  }
+  .amount {
+    top: 308px;
+    left: 1201px;
+  }
+  .date-and-time,
+  .title-of-the {
+    position: absolute;
+    top: 313px;
+    left: 624px;
+  }
+  .date-and-time {
+    top: 334px;
+    left: 54px;
+    font-size: var(--font-size-base);
+  }
+  .librarian-page2 {
+    width: 100%;
+    position: relative;
+    height: 1024px;
+    overflow: hidden;
+    text-align: left;
+    font-size: var(--font-size-5xl);
+    color: var(--color-black);
+    font-family: var(--font-inter);
+  }
+  body {
+    margin: 0;
+    line-height: normal;
+  }
+  
+  :root {
+    /* fonts */
+    --font-inter: Inter;
+  
+    /* font sizes */
+    --font-size-13xl: 32px;
+    --font-size-lgi: 19px;
+    --font-size-7xl: 26px;
+    --font-size-29xl: 48px;
+    --font-size-10xl: 29px;
+    --font-size-19xl: 38px;
+    --font-size-17xl: 36px;
+    --font-size-3xl: 22px;
+    --font-size-smi: 13px;
+    --font-size-mini: 15px;
+    --font-size-5xl: 24px;
+    --font-size-base: 16px;
+    --font-size-xl: 20px;
+  
+    /* Colors */
+    --color-black: #000;
+    --color-white: #fff;
+    --color-gainsboro: #d9d9d9;
+    --color-gray-100: #878787;
+    --color-gray-200: #7a7a7a;
+    --color-gray-300: #787878;
+    --color-darkslateblue: #00275e;
+    --color-skyblue: #8dbcde;
+    --color-steelblue-100: #335991;
+    --color-steelblue-200: #19547e;
+    --color-cornflowerblue-100: #39acff;
+    --color-dimgray-100: #6e6e6e;
+    --color-dimgray-200: #545454;
+    --color-dimgray-300: #505050;
+    --color-darkslategray: #204c6e;
+    --color-aliceblue: #dfe9f0;
+  
+    /* Gaps */
+    --gap-15xl: 34px;
+    --gap-6xl: 25px;
+    --gap-16xl: 35px;
+    --gap-mid: 17px;
+    --gap-33xl: 52px;
+    --gap-27xl: 46px;
+    --gap-xl: 20px;
+    --gap-lgi: 19px;
+  
+    /* Paddings */
+    --padding-mini: 15px;
+    --padding-base: 16px;
+    --padding-6xl: 25px;
+    --padding-5xl: 24px;
+    --padding-xl: 20px;
+    --padding-xs: 12px;
+    --padding-lg: 18px;
+    --padding-10xs: 3px;
+    --padding-36xl: 55px;
+    --padding-8xl: 27px;
+    --padding-smi: 13px;
+    --padding-25xl: 44px;
+    --padding-15xl: 34px;
+    --padding-5xs: 8px;
+    --padding-12xs: 1px;
+    --padding-46xl: 65px;
+    --padding-6xs: 7px;
+    --padding-22xl: 41px;
+    --padding-23xl: 42px;
+    --padding-21xl: 40px;
+    --padding-2xl: 21px;
+    --padding-14xl: 33px;
+    --padding-11xl: 30px;
+    --padding-3xl: 22px;
+    --padding-sm: 14px;
+    --padding-9xl: 28px;
+    --padding-24xl: 43px;
+    --padding-13xl: 32px;
+    --padding-11xs: 2px;
+    --padding-4xs: 9px;
+    --padding-lgi: 19px;
+    --padding-37xl: 56px;
+    --padding-38xl: 57px;
+    --padding-17xl: 36px;
+  
+    /* Border radiuses */
+    --br-139xl: 158px;
+    --br-3xs: 10px;
+    --br-8xs: 5px;
+  }
+  

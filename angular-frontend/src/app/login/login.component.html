@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="login-page">
+      <div class="background">
+        <img class="image-5-icon7" alt="" src="./assets/images/2.jpg" />
+      </div>
+      <div class="login-page-child"></div>
+      <div class="login-page-item"></div>
+      <div class="login-page-inner"></div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <input
+          type="email"
+          id="textBox"
+          formControlName="email"
+          class="login-page-child1"
+          placeholder="Enter email"
+        />
+
+        <input
+          type="password"
+          id="passwordBox"
+          formControlName="password"
+          class="login-page-child2"
+          placeholder="Enter password..."
+        />
+
+        <div class="login-page-child3" id="rectangle5"></div>
+        <button type="submit" class="login">Login</button>
+      </form>
+
+      <div class="library-management-system8">Library Management System</div>
+      <div class="login1">Login</div>
+      <div class="password4"></div>
+      <img class="image-38-icon3" alt="" src="../../assets/images/4.png" />
+
+      <img class="image-39-icon" alt="" src="../../assets/images/3.png" />
+
+      <div class="wrapper-image-43">
+        <img class="image-4-icon4" alt="" src="../../assets/images/1.png" />
+      </div>
+      <div class="unlock-the-world">Unlock the World of Knowledge</div>
+      <div class="access-a-treasure">
+        Access a treasure trove of books and knowledge
+      </div>
+    </div>
+
+    <script>
+      var rectangle5 = document.getElementById("rectangle5");
+      if (rectangle5) {
+        rectangle5.addEventListener("click", function (e) {});
+      }
+    </script>
+  </body>
+</html>
