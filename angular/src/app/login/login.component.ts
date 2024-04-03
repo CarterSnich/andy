@@ -38,7 +38,7 @@ export class LoginComponent {
       complete: () => {
         this.authState.setAuthState(true);
         this.loginForm.reset();
-        this.router.navigate(['inventory']);
+        this.router.navigate(['librarian']);
       },
       next: (result) => {
         this.responseHandler(result);

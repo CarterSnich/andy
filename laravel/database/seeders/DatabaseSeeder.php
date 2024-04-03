@@ -24,5 +24,9 @@ class DatabaseSeeder extends Seeder
             'type' => 'librarian',
             'contact' => '0921273476'
         ]);
+
+        \App\Models\Book::factory()->create([
+            'title' => 'The Book', 'author' => 'Sherlock', 'publisher' => 'The Pub', 'price' => 1111
+        ]);
     }
 }

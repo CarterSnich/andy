@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-  
   <body>
     <div class="librarian-page">
       <div class="wrapper-image-5">
@@ -24,8 +23,8 @@
       />
 
       <div class="la-rhaina-rabino-container" id="laRhainaRabino">
-        <p class="la-rhaina-rabino">La Rhaina Rabino</p>
-        <p class="p">2100804</p>
+        <p class="la-rhaina-rabino">{{ user?.name }}</p>
+        <p class="p">{{ user?.id_number }}</p>
       </div>
       <img class="image-6-icon1" alt="" src="./assets/images/logo.png" />
 
@@ -40,9 +39,13 @@
       <img class="image-6-icon2" alt="" src="./public/image-6@2x.png" />
 
       <div class="home">Home</div>
-      <div class="account-management" id="accountManagementText">
+      <a
+        class="account-management"
+        id="accountManagementText"
+        [routerLink]="['/account-management']"
+      >
         Account Management
-      </div>
+      </a>
       <div class="lost-and-damage" id="lostAndDamage">Lost and Damage</div>
       <div class="transaction" id="transactionText">Transaction</div>
       <div class="about" id="aboutText">About</div>
@@ -88,90 +91,92 @@
           // Please sync "Borrower page" to the project
         });
       }
-      
+
       var laRhainaRabino = document.getElementById("laRhainaRabino");
       if (laRhainaRabino) {
         laRhainaRabino.addEventListener("click", function (e) {
           // Please sync "Borrower page" to the project
         });
       }
-      
-      var accountManagementText = document.getElementById("accountManagementText");
+
+      var accountManagementText = document.getElementById(
+        "accountManagementText"
+      );
       if (accountManagementText) {
         accountManagementText.addEventListener("click", function (e) {
           // Please sync "Librarian page" to the project
         });
       }
-      
+
       var lostAndDamage = document.getElementById("lostAndDamage");
       if (lostAndDamage) {
         lostAndDamage.addEventListener("click", function (e) {
           // Please sync "Librarian page" to the project
         });
       }
-      
+
       var transactionText = document.getElementById("transactionText");
       if (transactionText) {
         transactionText.addEventListener("click", function (e) {
           // Please sync "Librarian page" to the project
         });
       }
-      
+
       var aboutText = document.getElementById("aboutText");
       if (aboutText) {
         aboutText.addEventListener("click", function (e) {
           // Please sync "Librarian page" to the project
         });
       }
-      
+
       var logoutText = document.getElementById("logoutText");
       if (logoutText) {
         logoutText.addEventListener("click", function (e) {
           // Please sync "Login page" to the project
         });
       }
-      
+
       var rectangle5 = document.getElementById("rectangle5");
       if (rectangle5) {
         rectangle5.addEventListener("click", function (e) {
           // Please sync "Librarian page" to the project
         });
       }
-      
+
       var rectangle6 = document.getElementById("rectangle6");
       if (rectangle6) {
         rectangle6.addEventListener("click", function (e) {
           // Please sync "Librarian page" to the project
         });
       }
-      
+
       var rectangle7 = document.getElementById("rectangle7");
       if (rectangle7) {
         rectangle7.addEventListener("click", function (e) {
           // Please sync "Librararian page" to the project
         });
       }
-      
+
       var rectangle8 = document.getElementById("rectangle8");
       if (rectangle8) {
         rectangle8.addEventListener("click", function (e) {
           // Please sync "Librarian page" to the project
         });
       }
-      
+
       var rectangle9 = document.getElementById("rectangle9");
       if (rectangle9) {
         rectangle9.addEventListener("click", function (e) {
           // Please sync "Librarian page" to the project
         });
       }
-      
+
       var rectangle10 = document.getElementById("rectangle10");
       if (rectangle10) {
         rectangle10.addEventListener("click", function (e) {
           // Please sync "Librarian page" to the project
         });
       }
-      </script>
+    </script>
   </body>
 </html>

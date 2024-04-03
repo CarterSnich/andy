@@ -1,15 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-export class User {
-  name!: string;
-  id_number!: string;
-  email!: string;
-  type!: string;
-  contact!: string;
-  password_confirmation!: string;
-}
+import User from '../user';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +17,7 @@ export class AuthService {
     return this.http.post<any>('http://127.0.0.1:8000/api/auth/login', user);
   }
   // Access user profile
-  profileUser(): Observable<any> {
-    return this.http.get('http://127.0.0.1:8000/api/auth/user-profile');
+  profileUser(): Observable<User> {
+    return this.http.get<User>('http://127.0.0.1:8000/api/auth/user-profile');
   }
 }

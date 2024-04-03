@@ -17,6 +17,40 @@
     <div class="librarian-page">
       <img class="image-5-icon1" alt="" src="./assets/images/logso.png" />
 
+      <form
+        [formGroup]="addBookForm"
+        style="
+          position: fixed;
+          z-index: 10000;
+          left: 0%;
+          top: 50%;
+          padding: 1rem;
+          background-color: white;
+          border: 1px solid black;
+        "
+        (ngSubmit)="addBook()"
+      >
+        <div>
+          <label for="">Book</label>
+          <input class="form-control" type="text" formControlName="title" />
+        </div>
+        <div>
+          <label for="">Author</label>
+          <input class="form-control" type="text" formControlName="author" />
+        </div>
+        <div>
+          <label for="">Publisher</label>
+          <input class="form-control" type="text" formControlName="publisher" />
+        </div>
+        <div>
+          <label for="">Price</label>
+          <input class="form-control" type="number" formControlName="price" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+        <button class="btn btn-warning">Cancel</button>
+      </form>
+
       <button class="cancel">Cancel</button>
       <div class="librarian-page-child" id="rectangle"></div>
       <img class="image-4-icon" alt="" src="./assets/images/logo.png" />
@@ -33,6 +67,7 @@
       <div class="librarian-page-child6"></div>
       <div class="librarian-page-child7"></div>
       <div class="librarian-page-child8"></div>
+
       <b class="book-name">
         <p class="book-name1">Book Name</p>
       </b>
@@ -88,64 +123,92 @@
           >
         </span>
       </div>
-      <div class="chip-heath-dan">Chip Heath, Dan Heath</div>
-      <div class="chip-heath-dan1">Chip Heath, Dan Heath</div>
-      <div class="chip-heath-dan2">Chip Heath, Dan Heath</div>
-      <div class="chip-heath-dan3">Chip Heath, Dan Heath</div>
-      <div class="chip-heath-dan4">Chip Heath, Dan Heath</div>
-      <div class="chip-heath-dan5">Chip Heath, Dan Heath</div>
-      <div class="chip-heath-dan6">Chip Heath, Dan Heath</div>
-      <div class="chip-heath-dan7">Chip Heath, Dan Heath</div>
-      <div class="random-house">Random House</div>
-      <div class="random-house1">Random House</div>
-      <div class="random-house2">Random House</div>
-      <div class="random-house3">Random House</div>
-      <div class="random-house4">Random House</div>
-      <div class="random-house5">Random House</div>
-      <div class="random-house6">Random House</div>
-      <div class="random-house7">Random House</div>
-      <div class="random-house8">Random House</div>
-      <div class="div">₱819.48</div>
-      <div class="div1">₱819.48</div>
-      <div class="div2">₱819.48</div>
-      <div class="div3">₱819.48</div>
-      <div class="div4">₱819.48</div>
-      <div class="div5">₱819.48</div>
-      <div class="div6">₱819.48</div>
-      <div class="div7">₱819.48</div>
-      <div class="div8">₱819.48</div>
-      <div class="librarian-page-child14"></div>
-      <div class="edit">Edit</div>
-      <div class="librarian-page-child15"></div>
-      <div class="delete">Delete</div>
-      <div class="librarian-page-child16"></div>
-      <div class="edit1">Edit</div>
-      <div class="librarian-page-child17"></div>
-      <div class="delete1">Delete</div>
-      <div class="librarian-page-child18"></div>
-      <div class="edit2">Edit</div>
-      <div class="librarian-page-child19"></div>
-      <div class="delete2">Delete</div>
-      <div class="librarian-page-child20"></div>
-      <div class="edit3">Edit</div>
-      <div class="librarian-page-child21"></div>
-      <div class="delete3">Delete</div>
-      <div class="librarian-page-child22"></div>
-      <div class="edit4">Edit</div>
-      <div class="librarian-page-child23"></div>
-      <div class="delete4">Delete</div>
-      <div class="librarian-page-child24"></div>
-      <div class="edit5">Edit</div>
-      <div class="librarian-page-child25"></div>
-      <div class="delete5">Delete</div>
-      <div class="librarian-page-child26"></div>
-      <div class="edit6">Edit</div>
-      <div class="librarian-page-child27"></div>
-      <div class="delete6">Delete</div>
-      <div class="librarian-page-child28"></div>
-      <div class="edit7">Edit</div>
-      <div class="librarian-page-child29"></div>
-      <div class="delete7">Delete</div>
+
+      <table
+        class="table table-striped w-50"
+        style="
+          position: fixed;
+          top: 10%;
+          left: 30%;
+          border: 1px solid black;
+          padding: 1rem;
+          background-color: white;
+        "
+      >
+        <thead>
+          <tr>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books">
+            <td>
+              <ng-template
+                [ngIf]="isEditting == book.id"
+                [ngIfElse]="titleInput"
+              >
+                <input type="text" [(ngModel)]="editTitleInput" />
+              </ng-template>
+              <ng-template #titleInput>
+                {{ book.title }}
+              </ng-template>
+            </td>
+            <td>
+              <ng-template
+                [ngIf]="isEditting == book.id"
+                [ngIfElse]="authorInput"
+              >
+                <input type="text" [(ngModel)]="editAuthorInput" />
+              </ng-template>
+              <ng-template #authorInput>
+                {{ book.author }}
+              </ng-template>
+            </td>
+            <td>
+              <ng-template
+                [ngIf]="isEditting == book.id"
+                [ngIfElse]="publisherInput"
+              >
+                <input type="text" [(ngModel)]="editPublisherInput" />
+              </ng-template>
+              <ng-template #publisherInput>
+                {{ book.publisher }}
+              </ng-template>
+            </td>
+            <td>
+              <ng-template
+                [ngIf]="isEditting == book.id"
+                [ngIfElse]="priceInput"
+              >
+                <input type="number" [(ngModel)]="editPriceInput" />
+              </ng-template>
+              <ng-template #priceInput> P {{ book.price }} </ng-template>
+            </td>
+            <td>
+              <ng-template
+                [ngIf]="isEditting == book.id"
+                [ngIfElse]="actionButtons"
+              >
+                <button (click)="clickDoneBook()" class="btn btn-primary">
+                  Done
+                </button>
+              </ng-template>
+              <ng-template #actionButtons>
+                <button class="btn btn-primary" (click)="clickEditBook(book)">
+                  Edit
+                </button>
+                <button class="btn btn-danger" (click)="deleteBook(book.id)">
+                  Delete
+                </button>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <script>

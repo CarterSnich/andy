@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -67,7 +67,6 @@ Route::delete('/users/{id_number}/delete', function (string $id_number) {
 });
 
 Route::get('/users', function (Request $request) {
-
     $keyword = $request->get('query');
     if ($keyword) {
         error_log($keyword);
@@ -81,6 +80,22 @@ Route::get('/users', function (Request $request) {
     } else {
         return User::all();
     }
+});
+
+Route::get('books', function (Request $request) {
+    return Book::all();
+});
+
+Route::post('books/add', function (Request $request) {
+    Book::create($request->all());
+});
+
+Route::delete('books/{id}/delete', function (Request $request, string $id) {
+    Book::where('id', $id)->delete();
+});
+
+Route::put('books/{id}/update', function (Request $request, string $id) {
+    Book::where('id', $id)->update($request->all());
 });
 
 Route::get('/auth/user-profile', function (Request $request) {

@@ -8,7 +8,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { User } from '../../shared/auth.service';
+import User from '../../user';
 
 @Component({
   selector: 'app-account-management',
