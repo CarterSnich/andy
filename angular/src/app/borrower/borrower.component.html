@@ -1,128 +1,108 @@
-<!DOCTYPE html>
-<html>
-  
-  <body>
-    <div class="borrower-page2">
-      <div class="wrapper-image-55">
-        <img class="image-5-icon7" alt="" src="./assets/images/home.png" />
-      </div>
-      <div class="borrower-page-child1"></div>
-      <div class="borrower-page-child2"></div>
-      <div class="borrower-page-child3"></div>
-      <div class="borrower-page-child4"></div>
-      <div class="image-6" id="image6"></div>
-      <div class="la-rhaina-rabino-container1" id="laRhainaRabino">
-        <p class="la-rhaina-rabino1">Andy Regana</p>
-        <p class="p1">2105769</p>
-      </div>
-      <div class="borrower-page-child5"></div>
-      <div class="wrapper-image-61">
-        <img class="image-6-icon4" alt="" src="./assets/images/logo.png" />
-      </div>
-      <div class="library-management-system8">Library Management System</div>
+<div id="component" class="d-flex flex-column vh-100">
+  <header class="d-flex">
+    <div
+      class="d-flex gap-3 p-3"
+      style="background-color: #00afff; min-width: 300px"
+    >
       <img
-        class="borrower-page-child6"
-        alt=""
-        src="./assets/images/search.png"
+        class="rounded-circle"
+        src="../../../assets/images/profile.png"
+        height="64"
       />
-
-      <div class="search1">Search</div>
-
-      
-      <b class="books4">Books</b>
-      <div class="borrower-page-child7"></div>
-      <div class="bad-blood2">BAD BLOOD</div>
-      <div class="john-carreyrou3">John Carreyrou</div>
-      <div class="borrower-page-child8"></div>
-      <div class="bad-blood3">BAD BLOOD</div>
-      <div class="john-carreyrou4">John Carreyrou</div>
-
-
-
-      <img class="image-9-icon" alt="" src="./assets/images/book1.png" />
-
-      <img class="image-9-icon1" alt="" src="./assets/images/book2.png" />
-
-      <img class="image-11-icon" alt="" src="../assets/images/book3.png" />
-
-      <img class="image-12-icon" alt="" src="./assets/images/book3.png" />
-
-      <div class="borrower-page-child9"></div>
-      <div class="bad-blood4">BAD BLOOD</div>
-      <div class="john-carreyrou5">John Carreyrou</div>
-      <img class="image-7-icon1" alt="" src="./assets/images/book1.png" />
-
-      <img class="image-6-icon5" alt="" src="./assets/images/book2.png" />
-
-      <img class="image-8-icon" alt="" src="./assets/images/book2.png" />
-
-      <img class="image-10-icon" alt="" src="./assets/images/book2.png" />
-
-      <div class="home1">Home</div>
-      <div class="payment" id="paymentText">Payment</div>
-      <div class="notification" id="notificationText">Notification</div>
-      <div class="transaction2" id="transactionText">Transaction</div>
-      <div class="about2" id="aboutText">About</div>
-      <div class="logout1">Logout</div>
-      <img class="image-31-icon" alt="" src="./assets/images/home.png" />
-
-      <img class="image-32-icon" alt="" src="./assets/images/payment.png" />
-
-      <img class="image-33-icon" alt="" src="../assets/images/notification.png" />
-
-      <img class="image-34-icon" alt="" src="./assets/images/transact.png" />
-
-      <img class="image-35-icon" alt="" src="./assets/images/info.png" />
-
-      <img class="image-30-icon" alt="" src="./public/image-30@2x.png" />
-
-      <div class="borrower-page-child10">
-    
+      <div class="d-flex flex-column justify-content-center text-light fw-bold">
+        <span>La Rhianna Grande</span>
+        <span>2100804</span>
+      </div>
     </div>
+    <div
+      class="flex-grow-1 d-flex p-3 align-items-center gap-3 shadow"
+      style="background-color: #002862"
+    >
+      <img
+        src="../../../assets/images/220px-LNUTaclobanLogo-removebg-preview.png"
+        height="64"
+        class=""
+      />
+      <h1 class="text-light">Library Management System</h1>
     </div>
+  </header>
 
-    <script>
-      var image6 = document.getElementById("image6");
-      if (image6) {
-        image6.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var laRhainaRabino = document.getElementById("laRhainaRabino");
-      if (laRhainaRabino) {
-        laRhainaRabino.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var paymentText = document.getElementById("paymentText");
-      if (paymentText) {
-        paymentText.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var notificationText = document.getElementById("notificationText");
-      if (notificationText) {
-        notificationText.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var transactionText = document.getElementById("transactionText");
-      if (transactionText) {
-        transactionText.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var aboutText = document.getElementById("aboutText");
-      if (aboutText) {
-        aboutText.addEventListener("click", function (e) {
-          window.location.href = "./borrower-page1.html";
-        });
-      }
-      </script>
-  </body>
-</html>
+  <div class="flex-grow-1 d-flex overflow-hidden">
+    <nav
+      class="nav flex-column shadow h-100 gap-5 p-5 px-3"
+      style="min-width: 300px"
+    >
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        Home
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/payment.png" height="24" />
+        Payment
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/notification.png" height="24" />
+        Notification
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/transact.png" height="24" />
+        Transaction
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3 mb-auto"
+        href="#"
+      >
+        <img src="../../assets/images/info.png" height="24" />
+        About
+      </a>
+      <a
+        class="nav-link fw-bold text-danger d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/logout.png" height="24" />
+        Logout
+      </a>
+    </nav>
+    <div class="flex-grow-1 p-5 py-3 overflow-scroll">
+      <input
+        type="search"
+        class="form-control mb-3 w-25"
+        placeholder="Search"
+      />
+      <div class="h1 text-center mb-3">Books</div>
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col" *ngFor="let book of books">
+          <div class="card h-100 bg-secondary text-light rounded rounded-4">
+            <div
+              class="card-img-top position-relative"
+              (mouseenter)="onEnter($event)"
+              (mouseleave)="onLeave($event)"
+            >
+              <img
+                [src]="book.isbn + '' | generateQr | async"
+                class="w-100 position-absolute top-50 start-50 translate-middle d-none"
+              />
+              <img src="../../assets/images/book1.png" class="w-100" />
+            </div>
+            <div class="card-body d-flex flex-column justify-content-center">
+              <h5 class="card-title text-center">{{ book.title }}</h5>
+              <p class="card-text text-center">{{ book.author }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

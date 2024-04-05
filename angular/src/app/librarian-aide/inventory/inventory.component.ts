@@ -20,12 +20,14 @@ export class InventoryComponent implements OnInit {
   books: Book[] | undefined;
   isEditting: string = '';
 
-  editTitleInput: string = '';
-  editAuthorInput: string = '';
-  editPublisherInput: string = '';
-  editPriceInput: number = 0;
-
   addBookForm: FormGroup = this.formBuilder.group<Book>({
+    title: '',
+    author: '',
+    price: 0,
+    publisher: '',
+  });
+
+  editBookForm: FormGroup = this.formBuilder.group<Book>({
     title: '',
     author: '',
     price: 0,
@@ -44,7 +46,9 @@ export class InventoryComponent implements OnInit {
   getBooks() {
     this.httpClient
       .get<Book[]>('http://localhost:8000/api/books')
-      .subscribe((books) => (this.books = books));
+      .subscribe((books) => {
+        this.books = books;
+      });
   }
 
   addBook() {
@@ -56,33 +60,25 @@ export class InventoryComponent implements OnInit {
       });
   }
 
-  deleteBook(id: string | undefined) {
-    if (id == undefined) return;
+  deleteBook(book: Book) {
     this.httpClient
-      .delete(`http://localhost:8000/api/books/${id}/delete`)
+      .delete(`http://localhost:8000/api/books/${book.id}/delete`)
       .subscribe(() => {
         this.getBooks();
       });
   }
 
   clickEditBook(book: Book) {
-    this.isEditting = <string>book.id;
-    this.editTitleInput = book.title;
-    this.editAuthorInput = book.author;
-    this.editPublisherInput = book.publisher;
-    this.editPriceInput = book.price;
+    this.editBookForm = this.formBuilder.group<Book>(book);
   }
 
-  clickDoneBook() {
+  updateBook() {
     this.httpClient
-      .put(`http://localhost:8000/api/books/${this.isEditting}/update`, {
-        title: this.editTitleInput,
-        author: this.editAuthorInput,
-        publisher: this.editPublisherInput,
-        price: this.editPriceInput,
-      })
+      .put(
+        `http://localhost:8000/api/books/${this.editBookForm.value.id}/update`,
+        this.editBookForm.value
+      )
       .subscribe(() => {
-        this.isEditting = '';
         this.getBooks();
       });
   }

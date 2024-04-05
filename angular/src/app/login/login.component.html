@@ -1,56 +1,46 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <div class="login-page">
-      <div class="background">
-        <img class="image-5-icon7" alt="" src="./assets/images/2.jpg" />
-      </div>
-      <div class="login-page-child"></div>
-      <div class="login-page-item"></div>
-      <div class="login-page-inner"></div>
+<div id="component" class="d-flex">
+  <div class="vh-100 w-50 d-flex flex-column bg-white">
+    <div class="bar"></div>
+    <div
+      class="flex-grow-1 d-flex flex-column align-items-center justify-content-center text-center pt-5 pb-3"
+    >
+      <h1 class="h4">Library Management System</h1>
 
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <input
-          type="email"
-          id="textBox"
-          formControlName="email"
-          class="login-page-child1"
-          placeholder="Enter email"
-        />
+      <img
+        src="../../assets/images/hero-image.png"
+        class="mb-auto"
+        height="256"
+      />
 
-        <input
-          type="password"
-          id="passwordBox"
-          formControlName="password"
-          class="login-page-child2"
-          placeholder="Enter password..."
-        />
-
-        <div class="login-page-child3" id="rectangle5"></div>
-        <button type="submit" class="login">Login</button>
-      </form>
-
-      <div class="library-management-system8">Library Management System</div>
-      <div class="login1">Login</div>
-      <div class="password4"></div>
-      <img class="image-38-icon3" alt="" src="../../assets/images/4.png" />
-
-      <img class="image-39-icon" alt="" src="../../assets/images/3.png" />
-
-      <div class="wrapper-image-43">
-        <img class="image-4-icon4" alt="" src="../../assets/images/1.png" />
-      </div>
-      <div class="unlock-the-world">Unlock the World of Knowledge</div>
-      <div class="access-a-treasure">
-        Access a treasure trove of books and knowledge
-      </div>
+      <span class="text-center d-flex flex-column">
+        <span class="fs-4 lead">Unlock the World of Knowledge</span>
+        <small>Access a treasure trove of books and knowledge</small>
+      </span>
     </div>
+    <div class="bar"></div>
+  </div>
+  <div class="vh-100 w-50 d-grid justify-content-center align-items-center">
+    <form
+      class="d-flex flex-column justify-content-center gap-3"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <span class="text-center fw-bold fs-4 text-white">Login</span>
 
-    <script>
-      var rectangle5 = document.getElementById("rectangle5");
-      if (rectangle5) {
-        rectangle5.addEventListener("click", function (e) {});
-      }
-    </script>
-  </body>
-</html>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        class="form-control"
+        formControlName="password"
+        placeholder="Password"
+      />
+
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>

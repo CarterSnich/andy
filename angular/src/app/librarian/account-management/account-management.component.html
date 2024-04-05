@@ -1,365 +1,229 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <div class="librarian-page">
-      <img class="image-5-icon" alt="" src="./assets/images/logo.png" />
-
-      <section class="branch-node">
-        <div class="leaf-node">
-          <div class="parent-node" id="parentNode"></div>
-          <div class="sibling-nodes">
-            <div class="child-nodes">
-              <div class="child-nodes-child"></div>
-              <img
-                class="image-38-icon"
-                loading="lazy"
-                alt=""
-                src="./assets/images/log1o.png"
-              />
-            </div>
-          </div>
-          <div class="isolated-node">
-            <div class="wrapper-image-4">
-              <img
-                class="image-4-icon"
-                loading="lazy"
-                alt=""
-                src="./assets/images/logo.png"
-              />
-            </div>
-          </div>
-          <div class="descendant-nodes">
-            <h1 class="library-management-system">Library Management System</h1>
-          </div>
-        </div>
-      </section>
-      <section class="siblings-and-children">
-        <div class="ancestors-and-descendants">
-          <h1 class="acount-management">Acount Management</h1>
-          <div class="disconnected-nodes">
-            <div class="subtree-nodes">
-              <div class="rooted-tree">
-                <button class="unrooted-tree">
-                  <div class="unrooted-tree-child"></div>
-                  <div class="librarian">Librarian</div>
-                </button>
-                <button class="unrooted-tree1">
-                  <div class="unrooted-tree-item"></div>
-                  <div class="borrower">Borrower</div>
-                </button>
-                <button class="unrooted-tree2">
-                  <div class="unrooted-tree-inner"></div>
-                  <div class="librarian-aide">Librarian Aide</div>
-                </button>
-              </div>
-            </div>
-            <div class="binary-search-tree">
-              <img
-                class="binary-search-tree-child"
-                alt=""
-                src="./public/rectangle-35.svg"
-              />
-
-              <div class="a-v-l-tree">
-                <input
-                  type="search"
-                  class="search"
-                  [formControl]="searchQuery"
-                  (input)="searchUsers()"
-                />
-              </div>
-              <img
-                class="material-symbols-lightsearch-icon"
-                loading="lazy"
-                alt=""
-                src="./public/materialsymbolslightsearch.svg"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="hash-table">
-        <div class="queue">
-          <div class="stack">
-            <form
-              class="linked-list"
-              [formGroup]="addUserForm"
-              (ngSubmit)="onSubmit()"
-            >
-              <div class="weighted-graph">
-                <div class="adjacency-matrix">
-                  <div class="adjacency-list">
-                    <div class="name">Name :</div>
-                  </div>
-                  <input
-                    class="adjacency-matrix-child"
-                    type="text"
-                    formControlName="name"
-                    style="border: 1px solid black"
-                  />
-                </div>
-              </div>
-              <div class="circular-linked-list">
-                <div class="id-number">ID Number :</div>
-                <div class="edge-nodes">
-                  <div class="directed-graph"></div>
-                  <input
-                    class="undirected-graph"
-                    style="border: 1px solid black"
-                    type="text"
-                    formControlName="id_number"
-                  />
-                </div>
-              </div>
-              <div class="password-parent">
-                <div class="password">Password:</div>
-                <div class="rectangle-parent">
-                  <div class="frame-child"></div>
-                  <input
-                    type="password"
-                    class="div"
-                    formControlName="password"
-                  />
-                </div>
-              </div>
-              <div class="circular-linked-list1">
-                <div class="email">Email:</div>
-                <div class="rectangle-group">
-                  <div class="frame-item"></div>
-                  <input
-                    type="email"
-                    class="div1"
-                    formControlName="email"
-                    style="border: 1px solid black"
-                  />
-                </div>
-              </div>
-              <div class="frame-parent">
-                <div class="contact-wrapper">
-                  <div class="contact">Contact:</div>
-                </div>
-                <div class="rectangle-container">
-                  <input
-                    class="frame-inner"
-                    type="text"
-                    formControlName="contact"
-                    style="border: 1px solid black"
-                  />
-                </div>
-              </div>
-              <div class="frame-parent">
-                <div class="contact-wrapper">
-                  <div class="contact">Type:</div>
-                </div>
-                <div class="rectangle-container">
-                  <select formControlName="type">
-                    <option value="librarian">Librarian</option>
-                    <option value="borrower">Borrower</option>
-                    <option value="aide">Librarian Aide</option>
-                  </select>
-                </div>
-              </div>
-              <div class="stack-inner">
-                <div class="data-aggregator-parent">
-                  <button class="data-aggregator" type="submit">
-                    <div class="data-aggregator-child"></div>
-                    <button class="add">Add</button>
-                  </button>
-                  <div class="input-processor">
-                    <h2 class="cancel">Cancel</h2>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="tree-structure">
-          <div class="condition-checker">
-            <div class="function-caller">
-              <div class="variable-holder">
-                <div class="error-handler">
-                  <div class="sequence-controller"></div>
-                  <b class="name1">Name</b>
-                </div>
-              </div>
-              <div class="data-filter">
-                <div class="data-transformer">
-                  <div class="data-merger"></div>
-                  <b class="id-number1">ID Number</b>
-                </div>
-              </div>
-              <div class="data-sorter">
-                <div class="data-finder">
-                  <div class="data-creator"></div>
-                  <b class="password1">Password</b>
-                </div>
-              </div>
-              <div class="variable-holder1">
-                <div class="frame-div">
-                  <div class="rectangle-div"></div>
-                  <b class="email1">Email</b>
-                </div>
-              </div>
-              <div class="variable-holder2">
-                <div class="rectangle-parent1">
-                  <div class="frame-child1"></div>
-                  <b class="contact1">Contact</b>
-                </div>
-              </div>
-              <div class="data-deleter">
-                <div class="data-protector"></div>
-                <b class="actions">Actions</b>
-              </div>
-            </div>
-          </div>
-
-          <div class="data-receiver">
-            <div class="data-sender" *ngFor="let user of users">
-              <div class="data-linker">
-                <div class="la-rhaine-rabino">{{ user.name }}</div>
-              </div>
-              <div class="data-visualizer">
-                <div class="data-storage">{{ user.id_number }}</div>
-              </div>
-              <div class="data-retriever">
-                <div class="data-compressor">*****</div>
-                <div class="data-expander">
-                  <div class="data-encoder">{{ user.email }}</div>
-                </div>
-              </div>
-              <div class="data-decoder">
-                <div class="data-decryptor">{{ user.contact }}</div>
-                <div class="data-encryptor"></div>
-                <div class="data-encryptor1"></div>
-              </div>
-              <div class="data-validator">
-                <div class="data-verifier">
-                  <button
-                    class="edit"
-                    data-bs-toggle="modal"
-                    data-bs-target="#edit-modal"
-                    (click)="clickEditUser(user.id_number)"
-                  >
-                    Edit
-                  </button>
-                  <button class="delete" (click)="deleteUser(user.id_number)">
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <img class="tree-structure-child" src="./public/rectangle-24.svg" />
-        </div>
-      </section>
-    </div>
-
-    <!-- Modal -->
+<div id="component" class="d-flex flex-column vh-100">
+  <header class="d-flex">
     <div
-      class="modal fade"
-      id="edit-modal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
+      class="d-flex align-items-center px-2"
+      style="background-color: #00afff"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form
-              class="row g-3"
-              [formGroup]="editUserForm"
-              (ngSubmit)="editUserSubmit()"
-            >
-              <div class="col-12">
-                <label class="form-label">Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="name"
-                />
-              </div>
-              <div class="col-12">
-                <label class="form-label">ID Number</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="id_number"
-                />
-              </div>
-              <div class="col-12">
-                <label class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  formControlName="email"
-                />
-              </div>
-              <div class="col-12">
-                <label class="form-label">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  formControlName="password"
-                />
-              </div>
-              <div class="col-12">
-                <label class="form-label">Account type</label>
-                <select
-                  class="form-select"
-                  aria-label="Default select example"
-                  formControlName="type"
-                >
-                  <option value="librarian">Librarian</option>
-                  <option value="borrower">Borrower</option>
-                  <option value="aide">Librarian Aide</option>
-                </select>
-              </div>
-              <div class="col-12">
-                <label class="form-label">Contact</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="contact"
-                />
-              </div>
-              <div class="col-12">
-                <button
-                  class="btn btn-primary me-1"
-                  type="submit"
-                  data-bs-dismiss="modal"
-                >
-                  Save
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+      <img src="../../../assets/images/left-arrow (3).png" height="32" />
+    </div>
+    <div
+      class="flex-grow-1 d-flex p-3 align-items-center gap-3 shadow"
+      style="background-color: #002862"
+    >
+      <img
+        src="../../../assets/images/220px-LNUTaclobanLogo-removebg-preview.png"
+        height="64"
+      />
+      <h1 class="text-light">Library Management System</h1>
+    </div>
+  </header>
+
+  <div class="flex-grow-1 d-flex flex-column gap-3 p-5 py-4">
+    <span class="h4 m-0">Account Management</span>
+    <div class="d-flex gap-3">
+      <button class="btn btn-sm btn-primary">Librarian</button>
+      <button class="btn btn-sm btn-primary">Borrower</button>
+      <button class="btn btn-sm btn-primary text-nowrap me-auto">
+        Librarian Aide
+      </button>
+      <div class="justify-self-end">
+        <input
+          type="search"
+          class="form-control form-control-sm"
+          placeholder="Search"
+        />
       </div>
     </div>
 
-    <script>
-      var parentNode = document.getElementById("parentNode");
-      if (parentNode) {
-        parentNode.addEventListener("click", function (e) {
-          // Please sync "Librarian" to the project
-        });
-      }
-    </script>
-  </body>
-</html>
+    <div class="d-flex gap-5">
+      <form
+        class="w-25 d-flex flex-column gap-2"
+        [formGroup]="addUserForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div>
+          <label>Name:</label>
+          <input
+            class="form-control form-control-sm bg-primary-subtle"
+            type="text"
+            formControlName="name"
+          />
+        </div>
+        <div>
+          <label>ID Number:</label>
+          <input
+            class="form-control form-control-sm bg-primary-subtle"
+            type="text"
+            formControlName="id_number"
+          />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input
+            class="form-control form-control-sm bg-primary-subtle"
+            type="email"
+            formControlName="email"
+          />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input
+            class="form-control form-control-sm bg-primary-subtle"
+            type="text"
+            formControlName="password"
+          />
+        </div>
+        <div>
+          <label>Type:</label>
+          <select
+            class="form-select form-select-sm bg-primary-subtle"
+            formControlName="type"
+          >
+            <option value="librarian">Librarian</option>
+            <option value="borrower">Borrower</option>
+            <option value="aide">Librarian Aide</option>
+          </select>
+        </div>
+        <div>
+          <label>Contact</label>
+          <input
+            class="form-control form-control-sm bg-primary-subtle"
+            type="text"
+            formControlName="contact"
+          />
+        </div>
+        <div class="d-flex mt-2 px-3 gap-3">
+          <button type="submit" class="flex-grow-1 btn btn-sm btn-primary">
+            Add
+          </button>
+          <button type="reset" class="flex-grow-1 btn btn-sm btn-primary">
+            Cancel
+          </button>
+        </div>
+      </form>
+
+      <div class="flex-grow-1 table-responsive border">
+        <table class="table table-striped align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">ID Number</th>
+              <th scope="col">Password</th>
+              <th scope="col">Email</th>
+              <th scope="col">Contact</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.name }}</td>
+              <td>{{ user.id_number }}</td>
+              <td>*****</td>
+              <td>{{ user.email }}</td>
+              <td class="align-middle">{{ user.contact }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-warning me-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#edit-modal"
+                  (click)="clickEditUser(user.id_number)"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger"
+                  (click)="deleteUser(user.id_number)"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="edit-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Edit user</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="row g-3"
+          [formGroup]="editUserForm"
+          (ngSubmit)="editUserSubmit()"
+        >
+          <div class="col-12">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" formControlName="name" />
+          </div>
+          <div class="col-12">
+            <label class="form-label">ID Number</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="id_number"
+            />
+          </div>
+          <div class="col-12">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" formControlName="email" />
+          </div>
+          <div class="col-12">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+            />
+          </div>
+          <div class="col-12">
+            <label class="form-label">Account type</label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              formControlName="type"
+            >
+              <option value="librarian">Librarian</option>
+              <option value="borrower">Borrower</option>
+              <option value="aide">Librarian Aide</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Contact</label>
+            <input type="text" class="form-control" formControlName="contact" />
+          </div>
+          <div class="col-12 d-flex justify-content-end">
+            <button
+              class="btn btn-primary me-1"
+              type="submit"
+              data-bs-dismiss="modal"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -87,7 +87,9 @@ Route::get('books', function (Request $request) {
 });
 
 Route::post('books/add', function (Request $request) {
-    Book::create($request->all());
+    $newBook = $request->all();
+    $newBook['isbn'] = fake()->isbn13();
+    Book::create($newBook);
 });
 
 Route::delete('books/{id}/delete', function (Request $request, string $id) {

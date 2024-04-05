@@ -26,7 +26,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Book::factory()->create([
-            'title' => 'The Book', 'author' => 'Sherlock', 'publisher' => 'The Pub', 'price' => 1111
+            'isbn' => fake()->isbn13(),
+            'title' => 'The Book',
+            'author' => 'Sherlock',
+            'publisher' => 'The Pub',
+            'price' => 1111
         ]);
     }
 }

@@ -1,299 +1,156 @@
-<!DOCTYPE html>
-<html>
-  
-  <body>
-    <div class="librarian-dashboard">
+<div id="component" class="d-flex flex-column vh-100">
+  <header class="d-flex">
+    <div
+      class="d-flex gap-3 p-3"
+      style="background-color: #00afff; width: 300px"
+    >
       <img
-        class="librarian-dashboard-child"
-        alt=""
-        src="./assets/images/l1ogo.png"
+        class="rounded-circle"
+        src="../../../assets/images/profile.png"
+        height="64"
       />
-
-      <div class="librarian-dashboard-item"></div>
-      <div class="librarian-dashboard-inner"></div>
-      <div class="librarian-dashboard-child1"></div>
-      <img
-        class="image-6-icon6"
-        alt=""
-        src="./assets/images/mypic.jpg"
-        id="image6"
-      />
-
-      <div class="librarian-name" id="librarianNameText">Andy Regana</div>
-      <div class="librariangmailcom" id="librariangmailcomText">
-        <p class="p2">2100894</p>
-        <p class="librariangmailcom1">librariangmail.com</p>
+      <div class="d-flex flex-column justify-content-center text-light fw-bold">
+        <span>{{ user?.name }}</span>
+        <span>{{ user?.id_number }}</span>
       </div>
-      <img class="image-6-icon7" alt="" src="./assets/images/logo.png" />
-
-      <div class="library-management-system9">Library Management System</div>
-      <img class="image-7-icon2" alt="" src="./assets/images/l1ogo.png" />
-
-      <img class="image-6-icon8" alt="" src="./assets/images/l1ogo.png" />
-
-      <div class="logout2">Logout</div>
-      <img
-        class="majesticonslogout"
-        alt=""
-        src="./assets/images/logout.png"
-      />
-
-      <div class="s-books"></div>
-      <img class="book-3-1" alt="" src="./assets/images/totallist.png" />
-
-      <div class="more-book"></div>
-      <div class="total-list-of">Total list of Books</div>
-      <div class="more-info">More Info</div>
-      <div class="s-users"></div>
-      <div class="more-users"></div>
-      <div class="more-info1">More Info</div>
-      <div class="s-issued"></div>
-      <div class="more-users1"></div>
-      <div class="more-info2">More Info</div>
-      <img class="vector-icon" alt="" src="./assets/images/l1ogo.png" />
-
-      <img class="vector-icon1" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon2" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon3" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon4" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon5" alt="" src="./assets/images/logso.png" />
-
-      <img class="vector-icon6" alt="" src="./assets/images/l1ogo.png" />
-
-      <img class="vector-icon7" alt="" src="./assets/images/l1ogo.png" />
-
-      <img class="vector-icon8" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon9" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon10" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon11" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon12" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon13" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon14" alt="" src="./public/vector.svg" />
-
-      <img class="vector-icon15" alt="" src="./public/vector.svg" />
-
-      <div class="available-books1">Available Books</div>
-      <img
-        class="not-returned-picture-icon"
-        alt=""
-        src="./public/notreturned-picture@2x.png"
-      />
-
-      <div class="librarian-dashboard-child2"></div>
-      <div class="librarian-dashboard-child3"></div>
-      <div class="librarian-dashboard-child4"></div>
-      <b class="added-new-book">Added New Book</b>
-      <div class="title-book-">Title Book - Author</div>
-      <div class="price">Price</div>
-      <div class="datetime">Date/Time</div>
-      <b class="added-new-book1">Added New Book</b>
-      <div class="title-book-1">Title Book - Author</div>
-      <div class="price1">Price</div>
-      <div class="datetime1">Date/Time</div>
-      <b class="added-new-book2">Added New Book</b>
-      <div class="title-book-2">Title Book - Author</div>
-      <div class="price2">Price</div>
-      <div class="datetime2">Date/Time</div>
-      <div class="librarian-dashboard-child5"></div>
-      <div class="librarian-dashboard-child6"></div>
-      <b class="notification1">Notification</b>
-      <b class="added-new-book3">Added New Book</b>
-      <div class="title-book-3">Title Book - Author</div>
-      <div class="price3">Price</div>
-      <div class="datetime3">Date/Time</div>
-      <b class="added-new-book4">Added New Book</b>
-      <div class="title-book-4">Title Book - Author</div>
-      <div class="price4">Price</div>
-      <div class="datetime4">Date/Time</div>
-      <b class="added-new-book5">Added New Book</b>
-      <div class="title-book-5">Title Book - Author</div>
-      <div class="price5">Price</div>
-      <div class="datetime5">Date/Time</div>
-      <img class="image-52-icon" alt="" src="./assets/images/borrow.png" />
-
-      <div class="lost-and-damage2" id="lostAndDamage">Lost and Damage</div>
-      <img class="image-53-icon" alt="" src="./assets/images/lost.png" />
-
-      <img class="image-54-icon" alt="" src="./assets/images/lost and damage.png" />
-
-      <div class="lost-and-damage3" id="lostAndDamage1">Lost and Damage</div>
-      <img class="image-55-icon" alt="" src="./public/image-52@2x.png" />
-
-      <div class="home2">Home</div>
-      <div class="payment-transaction" id="paymentTransactionText">
-        Payment Transaction
-      </div>
-      <div class="notification2" id="notificationText1">Notification</div>
-      <img class="image-52-icon1" alt="" src="./assets/images/losgo.png" />
-
-      <img class="image-53-icon1" alt="" src="./public/image-53@2x.png" />
-
-      <div class="about3" id="aboutText">About</div>
-      <img class="image-54-icon1" alt="" src="./public/image-54@2x.png" />
-
-      <img class="image-55-icon1" alt="" src="./public/image-55@2x.png" />
-
-      <img class="image-56-icon" alt="" src="./public/image-55@2x.png" />
-
-      <img class="image-57-icon" alt="" src="./public/image-53@2x.png" />
-
-      <img class="image-58-icon" alt="" src="./public/image-54@2x.png" />
-
-      <div class="about4" id="aboutText1">About</div>
-      <img class="image-59-icon" alt="" src="./public/image-52@2x.png" />
-
-      <div class="return-list" id="returnListText">Return List</div>
-      <img class="image-60-icon" alt="" src="./public/image-60@2x.png" />
-
-      <img class="image-61-icon" alt="" src="./public/image-60@2x.png" />
-
-      <div class="inventory" id="inventoryText">Inventory</div>
-      <div class="borrow-list" id="borrowListText">Borrow List</div>
-      <div class="return-list1" id="returnListText1">Return List</div>
-      <img class="image-62-icon" alt="" src="./public/image-62@2x.png" />
-
-      <img class="image-63-icon" alt="" src="./public/image-62@2x.png" />
-
-      <div class="inventory1" id="inventoryText1">Inventory</div>
-      <div class="borrow-list1" id="borrowListText1">Borrow List</div>
-      <div class="notification3" id="notificationText2">Notification</div>
-      <div class="payment-transaction1" id="paymentTransactionText1">
-        Payment Transaction
-      </div>
-      <div class="home3">Home</div>
     </div>
+    <div
+      class="flex-grow-1 d-flex p-3 align-items-center gap-3 shadow"
+      style="background-color: #002862"
+    >
+      <img
+        src="../../../assets/images/220px-LNUTaclobanLogo-removebg-preview.png"
+        height="64"
+        class=""
+      />
+      <h1 class="text-light">Library Management System</h1>
+    </div>
+  </header>
 
-    <script>
-      var image6 = document.getElementById("image6");
-      if (image6) {
-        image6.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var librarianNameText = document.getElementById("librarianNameText");
-      if (librarianNameText) {
-        librarianNameText.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var librariangmailcomText = document.getElementById("librariangmailcomText");
-      if (librariangmailcomText) {
-        librariangmailcomText.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var lostAndDamage = document.getElementById("lostAndDamage");
-      if (lostAndDamage) {
-        lostAndDamage.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var lostAndDamage1 = document.getElementById("lostAndDamage1");
-      if (lostAndDamage1) {
-        lostAndDamage1.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var paymentTransactionText = document.getElementById("paymentTransactionText");
-      if (paymentTransactionText) {
-        paymentTransactionText.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var notificationText1 = document.getElementById("notificationText1");
-      if (notificationText1) {
-        notificationText1.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var aboutText = document.getElementById("aboutText");
-      if (aboutText) {
-        aboutText.addEventListener("click", function (e) {
-          window.location.href = "./borrower-page1.html";
-        });
-      }
-      
-      var aboutText1 = document.getElementById("aboutText1");
-      if (aboutText1) {
-        aboutText1.addEventListener("click", function (e) {
-          window.location.href = "./borrower-page1.html";
-        });
-      }
-      
-      var returnListText = document.getElementById("returnListText");
-      if (returnListText) {
-        returnListText.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var inventoryText = document.getElementById("inventoryText");
-      if (inventoryText) {
-        inventoryText.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var borrowListText = document.getElementById("borrowListText");
-      if (borrowListText) {
-        borrowListText.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var returnListText1 = document.getElementById("returnListText1");
-      if (returnListText1) {
-        returnListText1.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var inventoryText1 = document.getElementById("inventoryText1");
-      if (inventoryText1) {
-        inventoryText1.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var borrowListText1 = document.getElementById("borrowListText1");
-      if (borrowListText1) {
-        borrowListText1.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var notificationText2 = document.getElementById("notificationText2");
-      if (notificationText2) {
-        notificationText2.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      
-      var paymentTransactionText1 = document.getElementById(
-        "paymentTransactionText1"
-      );
-      if (paymentTransactionText1) {
-        paymentTransactionText1.addEventListener("click", function (e) {
-          // Please sync "Borrower page" to the project
-        });
-      }
-      </script>
-  </body>
-</html>
+  <div class="flex-grow-1 d-flex overflow-hidden">
+    <nav
+      class="nav flex-column text-center shadow h-100 gap-3 py-3"
+      style="min-width: 300px"
+    >
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        Home
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        Inventory
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        Borrow List
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        Return List
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        Notification
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        Lost and Damage
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        href="#"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        Payment Transaction
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3 mb-auto"
+        href="#"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        About
+      </a>
+      <a
+        class="nav-link fw-bold text-danger d-flex align-items-center gap-3 justify-content-center"
+        href="#"
+      >
+        <img src="../../../assets/images/logout.png" height="24" />
+        Logout
+      </a>
+    </nav>
+
+    <div class="flex-grow-1 d-flex flex-column p-4">
+      <div class="row row-cols-3">
+        <div class="col">
+          <div class="card text-bg-success mb-3" style="max-width: 18rem">
+            <div class="card-body d-flex align-items-center shadow">
+              <img src="../../../assets/images/book (3) 1.png" height="128" />
+              <span class="fs-4 fw-bold">Total List of Books</span>
+            </div>
+            <div class="card-footer text-center">More Info</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card text-bg-danger mb-3" style="max-width: 18rem">
+            <div class="card-body d-flex align-items-center shadow">
+              <img src="../../../assets/images/Group 4.png" height="128" />
+              <span class="fs-4 fw-bold">Available Books</span>
+            </div>
+            <div class="card-footer text-center">More Info</div>
+          </div>
+        </div>
+        <div class="col">
+          <div
+            class="card text-bg-warning text-light mb-3"
+            style="max-width: 18rem"
+          >
+            <div class="card-body d-flex align-items-center shadow">
+              <img
+                src="../../../assets/images/Not-Returned Picture.png"
+                height="128"
+              />
+              <span class="fs-4 fw-bold">Not Returned List</span>
+            </div>
+            <div class="card-footer text-center">More Info</div>
+          </div>
+        </div>
+      </div>
+
+      <span class="h4 mt-3">Notification</span>
+      <div
+        class="flex-grow-1 table-responsive border border-dark border-2 overflow-scroll"
+      >
+        <table class="table table-striped align-middle m-0 table-borderless">
+          <tbody>
+            <tr *ngFor="let i of [0, 0, 0, 0, 0, 0, 0, 0, 0]">
+              <td class="d-grid">
+                <strong>Added New Book</strong>
+                <small>Title Book - Author</small>
+              </td>
+              <td>Price</td>
+              <td>Date/Time</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
