@@ -3,11 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
 import Book from '../../book';
+import { AuthService } from '../../shared/auth.service';
+import User from '../../user';
 
 @Component({
   selector: 'app-inventory',
@@ -17,8 +20,11 @@ import Book from '../../book';
   styleUrl: './inventory.component.css',
 })
 export class InventoryComponent implements OnInit {
+  previousUrl: string | undefined;
   books: Book[] | undefined;
   isEditting: string = '';
+  user: User | undefined;
+  searchQuery = new FormControl('');
 
   addBookForm: FormGroup = this.formBuilder.group<Book>({
     title: '',
@@ -36,10 +42,27 @@ export class InventoryComponent implements OnInit {
 
   constructor(
     private httpClient: HttpClient,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.authService.profileUser().subscribe((user) => {
+      this.user = user;
+      switch (user.type) {
+        case 'librarian':
+          this.previousUrl = 'librarian';
+          break;
+
+        case 'borrower':
+          this.previousUrl = 'borrower';
+          break;
+
+        case 'aide':
+          this.previousUrl = 'librarian-aide';
+          break;
+      }
+    });
     this.getBooks();
   }
 
@@ -81,5 +104,19 @@ export class InventoryComponent implements OnInit {
       .subscribe(() => {
         this.getBooks();
       });
+  }
+
+  searchBooks() {
+    if (this.searchQuery.value) {
+      this.httpClient
+        .get<Book[]>(
+          `http://localhost:8000/api/books?query=${this.searchQuery.value}`
+        )
+        .subscribe((books) => {
+          this.books = books;
+        });
+    } else {
+      this.getBooks();
+    }
   }
 }

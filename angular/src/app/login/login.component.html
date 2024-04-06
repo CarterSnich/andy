@@ -27,6 +27,10 @@
     >
       <span class="text-center fw-bold fs-4 text-white">Login</span>
 
+      <div *ngIf="errors" class="alert alert-danger" role="alert">
+        {{ errors.message }}
+      </div>
+
       <input
         type="email"
         class="form-control"

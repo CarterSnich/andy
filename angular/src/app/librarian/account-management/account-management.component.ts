@@ -23,6 +23,7 @@ export class AccountManagementComponent implements OnInit {
   editUserForm: FormGroup;
   currentEditUserIdNumber = '';
   searchQuery = new FormControl('');
+  previousUrl: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder,

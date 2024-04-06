@@ -69,7 +69,6 @@ Route::delete('/users/{id_number}/delete', function (string $id_number) {
 Route::get('/users', function (Request $request) {
     $keyword = $request->get('query');
     if ($keyword) {
-        error_log($keyword);
         return User::where(function ($query) use ($keyword) {
             $query->where('name', 'like', '%' . $keyword . '%')
                 ->orWhere('id_number', 'like', '%' . $keyword . '%')
@@ -83,7 +82,17 @@ Route::get('/users', function (Request $request) {
 });
 
 Route::get('books', function (Request $request) {
-    return Book::all();
+    $keyword = $request->get('query');
+    if ($keyword) {
+        return Book::where(function ($query) use ($keyword) {
+            $query->where('isbn', 'like', '%' . $keyword . '%')
+                ->orWhere('title', 'like', '%' . $keyword . '%')
+                ->orWhere('author', 'like', '%' . $keyword . '%')
+                ->orWhere('publisher', 'like', '%' . $keyword . '%');
+        })->get();
+    } else {
+        return Book::all();
+    }
 });
 
 Route::post('books/add', function (Request $request) {
@@ -92,7 +101,7 @@ Route::post('books/add', function (Request $request) {
     Book::create($newBook);
 });
 
-Route::delete('books/{id}/delete', function (Request $request, string $id) {
+Route::delete('books/{id}/delete', function (string $id) {
     Book::where('id', $id)->delete();
 });
 
