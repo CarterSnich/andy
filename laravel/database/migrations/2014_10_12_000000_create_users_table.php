@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('id_number');
+            $table->string('id_number')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->set('type', ['librarian', 'borrower', 'aide']);
+            $table->set('type', ['librarian', 'borrower', 'librarian-aide']);
             $table->string('contact');
             $table->rememberToken();
             $table->timestamps();

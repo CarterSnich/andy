@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,16 +8,19 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { AlertComponent } from '../../alert/alert.component';
 import User from '../../user';
 
 @Component({
   selector: 'app-account-management',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, AlertComponent],
   templateUrl: './account-management.component.html',
   styleUrl: './account-management.component.css',
 })
 export class AccountManagementComponent implements OnInit {
+  @ViewChild(AlertComponent) alertComponent!: AlertComponent;
+
   users: User[] = [];
   addUserForm: FormGroup;
   editUserForm: FormGroup;
@@ -55,19 +58,47 @@ export class AccountManagementComponent implements OnInit {
     this.httpClient
       .post('http://localhost:8000/api/users/add', this.addUserForm.value)
       .subscribe({
-        next: (result) => console.log(result),
         complete: () => {
           this.addUserForm.reset();
           this.getUsers();
+          this.alertComponent.addAlert('User added successfully.', 'success');
         },
-        error: (error) => console.error(error),
+        error: (err) => {
+          console.error(err);
+
+          let err_msg = '';
+          if (err.error.message) {
+            err_msg = ` ${err.error.message}`;
+          }
+          this.alertComponent.addAlert(
+            `Failed to add user.${err_msg}`,
+            'danger'
+          );
+        },
       });
   }
 
   deleteUser(id_number: string) {
     this.httpClient
       .delete(`http://localhost:8000/api/users/${id_number}/delete`)
-      .subscribe({ complete: () => this.getUsers() });
+      .subscribe({
+        complete: () => {
+          this.getUsers();
+          this.alertComponent.addAlert('User deleted successfully.', 'success');
+        },
+        error: (err) => {
+          console.error(err);
+
+          let err_msg = '';
+          if (err.error.message) {
+            err_msg = ` ${err.error.message}`;
+          }
+          this.alertComponent.addAlert(
+            `Failed to delete user.${err_msg}`,
+            'danger'
+          );
+        },
+      });
   }
 
   searchUsers() {
@@ -76,9 +107,22 @@ export class AccountManagementComponent implements OnInit {
         .get<User[]>(
           `http://localhost:8000/api/users?query=${this.searchQuery.value}`
         )
-        .subscribe((users) => {
-          this.users = users;
-          console.log(this.users);
+        .subscribe({
+          next: (users: User[]) => {
+            this.users = users;
+          },
+          error: (err) => {
+            console.error(err);
+
+            let err_msg = '';
+            if (err.error.message) {
+              err_msg = ` ${err.error.message}`;
+            }
+            this.alertComponent.addAlert(
+              `Failed to fetch users.${err_msg}`,
+              'danger'
+            );
+          },
         });
     } else {
       this.getUsers();
@@ -86,12 +130,23 @@ export class AccountManagementComponent implements OnInit {
   }
 
   getUsers() {
-    this.httpClient
-      .get<User[]>('http://localhost:8000/api/users')
-      .subscribe((users) => {
+    this.httpClient.get<User[]>('http://localhost:8000/api/users').subscribe({
+      next: (users: User[]) => {
         this.users = users;
-        console.log(this.users);
-      });
+      },
+      error: (err) => {
+        console.error(err);
+
+        let err_msg = '';
+        if (err.error.message) {
+          err_msg = ` ${err.error.message}`;
+        }
+        this.alertComponent.addAlert(
+          `Failed to fetch users.${err_msg}`,
+          'danger'
+        );
+      },
+    });
   }
 
   editUserSubmit() {
@@ -100,7 +155,24 @@ export class AccountManagementComponent implements OnInit {
         `http://localhost:8000/api/users/${this.currentEditUserIdNumber}/update`,
         this.editUserForm.value
       )
-      .subscribe({ complete: () => this.getUsers() });
+      .subscribe({
+        complete: () => {
+          this.getUsers();
+          this.alertComponent.addAlert('User updated successfully.', 'success');
+        },
+        error: (err) => {
+          console.error(err);
+
+          let err_msg = '';
+          if (err.error.message) {
+            err_msg = ` ${err.error.message}`;
+          }
+          this.alertComponent.addAlert(
+            `Failed to update user.${err_msg}`,
+            'danger'
+          );
+        },
+      });
   }
 
   clickEditUser(id_number: string) {

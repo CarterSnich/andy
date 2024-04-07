@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->string('publisher');
-            $table->unsignedDecimal('price');
+            $table->unsignedInteger('quantity');
+            $table->unsignedBigInteger('price');
 
             $table->timestamps();
         });

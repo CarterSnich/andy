@@ -4,6 +4,7 @@ interface Book {
   title: string;
   author: string;
   publisher: string;
+  quantity: number;
   price: number;
 }
 

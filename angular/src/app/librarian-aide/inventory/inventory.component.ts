@@ -29,15 +29,17 @@ export class InventoryComponent implements OnInit {
   addBookForm: FormGroup = this.formBuilder.group<Book>({
     title: '',
     author: '',
-    price: 0,
     publisher: '',
+    quantity: 0,
+    price: 0,
   });
 
   editBookForm: FormGroup = this.formBuilder.group<Book>({
     title: '',
     author: '',
-    price: 0,
     publisher: '',
+    quantity: 0,
+    price: 0,
   });
 
   constructor(
@@ -49,19 +51,7 @@ export class InventoryComponent implements OnInit {
   ngOnInit(): void {
     this.authService.profileUser().subscribe((user) => {
       this.user = user;
-      switch (user.type) {
-        case 'librarian':
-          this.previousUrl = 'librarian';
-          break;
-
-        case 'borrower':
-          this.previousUrl = 'borrower';
-          break;
-
-        case 'aide':
-          this.previousUrl = 'librarian-aide';
-          break;
-      }
+      this.previousUrl = user.type;
     });
     this.getBooks();
   }

@@ -20,8 +20,26 @@ class DatabaseSeeder extends Seeder
             'name' => 'La Rhaine Rabino',
             'id_number' => '295340',
             'password' => Hash::make('password'),
-            'email' => 'test@example.com',
+            'email' => 'librarian@example.com',
             'type' => 'librarian',
+            'contact' => '0921273476'
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Andy Ragana',
+            'id_number' => '849156',
+            'password' => Hash::make('password'),
+            'email' => 'borrower@example.com',
+            'type' => 'borrower',
+            'contact' => '0921273476'
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'John de la Cruz',
+            'id_number' => '161918',
+            'password' => Hash::make('password'),
+            'email' => 'aide@example.com',
+            'type' => 'librarian-aide',
             'contact' => '0921273476'
         ]);
 
@@ -30,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'The Book',
             'author' => 'Sherlock',
             'publisher' => 'The Pub',
+            'quantity' => 500,
             'price' => 1111
         ]);
     }

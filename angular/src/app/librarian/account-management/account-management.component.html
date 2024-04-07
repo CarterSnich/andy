@@ -72,7 +72,7 @@
           <label>Password:</label>
           <input
             class="form-control form-control-sm bg-primary-subtle"
-            type="text"
+            type="password"
             formControlName="password"
           />
         </div>
@@ -84,7 +84,7 @@
           >
             <option value="librarian">Librarian</option>
             <option value="borrower">Borrower</option>
-            <option value="aide">Librarian Aide</option>
+            <option value="librarian-aide">Librarian Aide</option>
           </select>
         </div>
         <div>
@@ -111,8 +111,8 @@
             <tr>
               <th scope="col">Name</th>
               <th scope="col">ID Number</th>
-              <th scope="col">Password</th>
               <th scope="col">Email</th>
+              <th scope="col">Type</th>
               <th scope="col">Contact</th>
               <th scope="col">Actions</th>
             </tr>
@@ -121,8 +121,8 @@
             <tr *ngFor="let user of users">
               <td>{{ user.name }}</td>
               <td>{{ user.id_number }}</td>
-              <td>*****</td>
               <td>{{ user.email }}</td>
+              <td>{{ user.type }}</td>
               <td class="align-middle">{{ user.contact }}</td>
               <td>
                 <button
@@ -202,7 +202,7 @@
             >
               <option value="librarian">Librarian</option>
               <option value="borrower">Borrower</option>
-              <option value="aide">Librarian Aide</option>
+              <option value="librarian-aide">Librarian Aide</option>
             </select>
           </div>
           <div class="col-12">
@@ -230,3 +230,5 @@
     </div>
   </div>
 </div>
+
+<app-alert />
