@@ -40,19 +40,7 @@ export class LoginComponent {
         this.loginForm.reset();
 
         this.authService.profileUser().subscribe((user) => {
-          switch (user.type) {
-            case 'librarian':
-              this.router.navigate(['librarian']);
-              break;
-
-            case 'borrower':
-              this.router.navigate(['borrower']);
-              break;
-
-            case 'aide':
-              this.router.navigate(['librarian-aide']);
-              break;
-          }
+          this.router.navigate([user.type]);
         });
       },
       next: (result) => {
