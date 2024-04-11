@@ -27,6 +27,7 @@ export class AccountManagementComponent implements OnInit {
   currentEditUserIdNumber = '';
   searchQuery = new FormControl('');
   previousUrl: string | null = null;
+  deleteUser: User | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,6 +55,10 @@ export class AccountManagementComponent implements OnInit {
     this.getUsers();
   }
 
+  setDeleteUser(user: User) {
+    this.deleteUser = user;
+  }
+
   onSubmit(): void {
     this.httpClient
       .post('http://localhost:8000/api/users/add', this.addUserForm.value)
@@ -78,9 +83,11 @@ export class AccountManagementComponent implements OnInit {
       });
   }
 
-  deleteUser(id_number: string) {
+  clickDeleteUser() {
     this.httpClient
-      .delete(`http://localhost:8000/api/users/${id_number}/delete`)
+      .delete(
+        `http://localhost:8000/api/users/${this.deleteUser?.id_number}/delete`
+      )
       .subscribe({
         complete: () => {
           this.getUsers();

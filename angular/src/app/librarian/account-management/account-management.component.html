@@ -137,7 +137,9 @@
                 <button
                   type="button"
                   class="btn btn-sm btn-danger"
-                  (click)="deleteUser(user.id_number)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#delete-modal"
+                  (click)="setDeleteUser(user)"
                 >
                   Delete
                 </button>
@@ -226,6 +228,39 @@
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Delete user</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body d-grid">
+        Are you sure to delete this user?
+        <span class="fs-4">{{ deleteUser?.name }}</span>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-danger"
+          (click)="clickDeleteUser()"
+          data-bs-dismiss="modal"
+        >
+          Delete
+        </button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
       </div>
     </div>
   </div>

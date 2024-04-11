@@ -153,11 +153,17 @@ Route::put('books/{id}/update', function (Request $request, string $id) {
         'title' => 'required',
         'author' => 'required',
         'publisher' => 'required',
+        'quantity' => ['required', 'numeric'],
         'price' => ['required', 'numeric']
     ]);
 
-    if ($book = Book::where('id', $id)) {
-        $book->update($request->all());
+    if ($book = Book::where('id', $id)->first()) {
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->publisher = $request->publisher;
+        $book->quantity = $request->quantity;
+        $book->price = $request->price;
+        $book->save();
     } else {
         abort(404, 'Book not found.');
     }
