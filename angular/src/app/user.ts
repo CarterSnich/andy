@@ -1,10 +1,11 @@
 interface User {
-  name: string;
+  firstname: string;
+  lastname: string;
   id_number: string;
   email: string;
   type: string;
   contact: string;
-  password_confirmation?: string;
+  password?: string;
 }
 
 export default User;

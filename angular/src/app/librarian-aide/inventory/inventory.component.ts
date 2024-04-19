@@ -8,6 +8,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
 import Book from '../../book';
 import { AuthService } from '../../shared/auth.service';
@@ -49,7 +50,8 @@ export class InventoryComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +61,9 @@ export class InventoryComponent implements OnInit {
         this.previousUrl = user.type;
       },
       error: (err) => {
+        if (err.status == 401) {
+          this.router.navigate(['']);
+        }
         console.error(err);
 
         let err_msg = '';

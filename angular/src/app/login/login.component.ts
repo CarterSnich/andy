@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthStateService } from '../shared/auth-state.service';
@@ -13,12 +14,13 @@ import { TokenService } from '../shared/token.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errors: any = null;
   constructor(
     public router: Router,
     public fb: FormBuilder,
+    public httpClient: HttpClient,
     public authService: AuthService,
     private token: TokenService,
     private authState: AuthStateService
@@ -27,6 +29,17 @@ export class LoginComponent {
       email: [],
       password: [],
     });
+  }
+
+  ngOnInit(): void {
+    this.authService.profileUser().subscribe(
+      (user) => {
+        this.router.navigate([user.type]);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 
   onSubmit() {
@@ -38,18 +51,13 @@ export class LoginComponent {
       complete: () => {
         this.authState.setAuthState(true);
         this.loginForm.reset();
-
         this.authService.profileUser().subscribe((user) => {
           this.router.navigate([user.type]);
         });
       },
       next: (result) => {
-        this.responseHandler(result);
+        this.token.handleData(result.access_token);
       },
     });
-  }
-  // Handle response
-  responseHandler(data: any) {
-    this.token.handleData(data.access_token);
   }
 }

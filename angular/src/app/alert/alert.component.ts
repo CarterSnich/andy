@@ -16,16 +16,21 @@ export class AlertComponent implements OnInit {
 
   addAlert(message: string, type: string) {
     const newAlert = document.createElement('div');
-    newAlert.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
-        ${message}
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>`;
+    newAlert.classList.value = `alert alert-${type} alert-dismissible fade show`;
+    newAlert.role = 'alert';
+    newAlert.innerHTML = `
+      ${message}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    `;
 
     this.wrapper?.append(newAlert);
+    setTimeout(() => {
+      (<HTMLButtonElement>newAlert.childNodes[1]).click();
+    }, 10000);
   }
 }

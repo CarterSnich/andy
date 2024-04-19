@@ -24,6 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth:sanctum')->get('/auth/validate-token', function () {
+    return ['data' => true];
+});
+
 Route::post('/auth/login', function (Request $request) {
 
     $request->validate([
@@ -44,39 +48,56 @@ Route::post('/auth/login', function (Request $request) {
     ]);
 });
 
+Route::get('/auth/logout', function (Request $request) {
+});
+
 
 Route::post('/users/add', function (Request $request) {
-    $request->validate([
-        'name' => 'required',
-        'id_number' => ['required', 'unique:users'],
+    $new_user = $request->validate([
+        'firstname' => ['required', 'regex:/^[a-zA-Z]+(?:-[a-zA-Z]+)*(?:\s[a-zA-Z]+(?:-[a-zA-Z]+)*)*$/'],
+        'lastname' => ['required', 'regex:/^[a-zA-Z]+(?:-[a-zA-Z]+)*(?:\s[a-zA-Z]+(?:-[a-zA-Z]+)*)*$/'],
+        'id_number' => ['required', 'size:7', 'unique:users'],
         'email' => ['required', 'email', 'unique:users'],
         'password' => 'required',
         'type' => [
             'required',
             Rule::in(['librarian', 'borrower', 'librarian-aide']),
         ],
-        'contact' => 'required'
+        'contact' => ['required', 'regex:/(09)([0-9]{9})/', 'unique:users']
     ]);
-    $new_user = $request->all();
     $new_user['password'] = Hash::make($request->password);
     User::create($new_user);
 });
 
 Route::put('/users/{id_number}/update', function (Request $request, string $id_number) {
     $request->validate([
-        'name' => 'required',
-        'id_number' => ['required', 'unique:users'],
-        'email' => ['required', 'email', 'unique:users'],
+        'firstname' => ['required', 'regex:/^[a-zA-Z]+(?:-[a-zA-Z]+)*(?:\s[a-zA-Z]+(?:-[a-zA-Z]+)*)*$/'],
+        'lastname' => ['required', 'regex:/^[a-zA-Z]+(?:-[a-zA-Z]+)*(?:\s[a-zA-Z]+(?:-[a-zA-Z]+)*)*$/'],
+        'id_number' => [
+            'required',
+            'size:7',
+            Rule::unique('users')->ignore($id_number, 'id_number'),
+        ],
+        'email' => [
+            'required',
+            'email',
+            Rule::unique('users')->ignore($id_number, 'id_number'),
+        ],
         'password' => ['sometimes', 'required'],
         'type' => [
             'required',
             Rule::in(['librarian', 'borrower', 'librarian-aide']),
         ],
-        'contact' => 'required'
+        'contact' => [
+            'required',
+            'regex:/(09)([0-9]{9})/',
+            Rule::unique('users')->ignore($id_number, 'id_number'),
+        ]
     ]);
 
     if ($user = User::where('id_number', $id_number)->first()) {
-        $user->name = $request->name;
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
         $user->id_number = $request->id_number;
         $user->email = $request->email;
         if ($request->password) {
@@ -102,7 +123,9 @@ Route::get('/users', function (Request $request) {
     $keyword = $request->get('query');
     if ($keyword) {
         return User::where(function ($query) use ($keyword) {
-            $query->where('name', 'like', '%' . $keyword . '%')
+            $query
+                ->where('firstname', 'like', '%' . $keyword . '%')
+                ->orWhere('lastname', 'like', '%' . $keyword . '%')
                 ->orWhere('id_number', 'like', '%' . $keyword . '%')
                 ->orWhere('contact', 'like', '%' . $keyword . '%')
                 ->orWhere('type', 'like', '%' . $keyword . '%')
@@ -117,7 +140,8 @@ Route::get('books', function (Request $request) {
     $keyword = $request->get('query');
     if ($keyword) {
         return Book::where(function ($query) use ($keyword) {
-            $query->where('isbn', 'like', '%' . $keyword . '%')
+            $query
+                ->where('isbn', 'like', '%' . $keyword . '%')
                 ->orWhere('title', 'like', '%' . $keyword . '%')
                 ->orWhere('author', 'like', '%' . $keyword . '%')
                 ->orWhere('publisher', 'like', '%' . $keyword . '%');
@@ -128,14 +152,25 @@ Route::get('books', function (Request $request) {
 });
 
 Route::post('books/add', function (Request $request) {
-    $request->validate([
+
+    $new_book = $request->validate([
         'title' => 'required',
         'author' => 'required',
         'publisher' => 'required',
+        'quantity' => 'required',
         'price' => ['required', 'numeric']
     ]);
 
-    $newBook = $request->all();
+    if ($existing_book = Book::where('title', $new_book['title'])
+        ->where('author', $new_book['author'])
+        ->where('publisher', $new_book['publisher'])
+        ->first()
+    ) {
+        $existing_book->quantity = $existing_book->quantity + 1;
+        $existing_book->save();
+        return;
+    }
+
     $newBook['isbn'] = fake()->isbn13();
     Book::create($newBook);
 });

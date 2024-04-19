@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
 import { AuthService } from '../../shared/auth.service';
 import User from '../../user';
@@ -18,10 +17,7 @@ export class LibrarianDashboardComponent implements OnInit {
 
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
 
-  constructor(
-    private httpClient: HttpClient,
-    private authService: AuthService
-  ) {}
+  constructor(public router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.profileUser().subscribe({
@@ -29,6 +25,11 @@ export class LibrarianDashboardComponent implements OnInit {
         this.user = user;
       },
       error: (err) => {
+        if (err.status == 401) {
+          this.router.navigate(['']);
+          return;
+        }
+
         console.error(err);
         this.alertComponent.addAlert('Failed to fetch user profile.', 'danger');
       },
@@ -36,6 +37,11 @@ export class LibrarianDashboardComponent implements OnInit {
   }
 
   logout() {
-    this.authService.signout().subscribe({});
+    this.authService.signout().subscribe({
+      complete: () => {
+        console.log('logut');
+        this.router.navigate(['']);
+      },
+    });
   }
 }

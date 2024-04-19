@@ -45,11 +45,19 @@
         (ngSubmit)="onSubmit()"
       >
         <div>
-          <label>Name:</label>
+          <label>First name:</label>
           <input
             class="form-control form-control-sm bg-primary-subtle"
             type="text"
-            formControlName="name"
+            formControlName="firstname"
+          />
+        </div>
+        <div>
+          <label>Last name:</label>
+          <input
+            class="form-control form-control-sm bg-primary-subtle"
+            type="text"
+            formControlName="lastname"
           />
         </div>
         <div>
@@ -109,7 +117,8 @@
         <table class="table table-striped align-middle">
           <thead class="table-dark">
             <tr>
-              <th scope="col">Name</th>
+              <th scope="col">First name</th>
+              <th scope="col">Last name</th>
               <th scope="col">ID Number</th>
               <th scope="col">Email</th>
               <th scope="col">Type</th>
@@ -119,7 +128,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let user of users">
-              <td>{{ user.name }}</td>
+              <td>{{ user.firstname }}</td>
+              <td>{{ user.lastname }}</td>
               <td>{{ user.id_number }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.type }}</td>
@@ -172,8 +182,20 @@
           (ngSubmit)="editUserSubmit()"
         >
           <div class="col-12">
-            <label class="form-label">Name</label>
-            <input type="text" class="form-control" formControlName="name" />
+            <label class="form-label">First name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstname"
+            />
+          </div>
+          <div class="col-12">
+            <label class="form-label">Last name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastname"
+            />
           </div>
           <div class="col-12">
             <label class="form-label">ID Number</label>
@@ -248,7 +270,9 @@
       </div>
       <div class="modal-body d-grid">
         Are you sure to delete this user?
-        <span class="fs-4">{{ deleteUser?.name }}</span>
+        <span class="fs-4">
+          {{ deleteUser?.firstname + " " + deleteUser?.lastname }}
+        </span>
       </div>
       <div class="modal-footer">
         <button

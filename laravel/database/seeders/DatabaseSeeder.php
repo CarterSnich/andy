@@ -17,39 +17,47 @@ class DatabaseSeeder extends Seeder
 
 
         \App\Models\User::factory()->create([
-            'name' => 'La Rhaine Rabino',
-            'id_number' => '295340',
+            'firstname' => 'La Rhaine',
+            'lastname' => 'Rabino',
+            'id_number' => '2954534',
             'password' => Hash::make('password'),
             'email' => 'librarian@example.com',
             'type' => 'librarian',
-            'contact' => '0921273476'
+            'contact' => '09212734764'
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'Andy Ragana',
-            'id_number' => '849156',
+            'firstname' => 'Andy',
+            'lastname' => 'Ragana',
+            'id_number' => '8494156',
             'password' => Hash::make('password'),
             'email' => 'borrower@example.com',
             'type' => 'borrower',
-            'contact' => '0921273476'
+            'contact' => '09562818189'
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'John de la Cruz',
-            'id_number' => '161918',
+            'firstname' => 'John',
+            'lastname' => 'de la Cruz',
+            'id_number' => '1619185',
             'password' => Hash::make('password'),
             'email' => 'aide@example.com',
             'type' => 'librarian-aide',
-            'contact' => '0921273476'
+            'contact' => '09123456789'
         ]);
 
-        \App\Models\Book::factory()->create([
-            'isbn' => fake()->isbn13(),
-            'title' => 'The Book',
-            'author' => 'Sherlock',
-            'publisher' => 'The Pub',
-            'quantity' => 500,
-            'price' => 1111
-        ]);
+
+        $faker = fake();
+
+        for ($i = 0; $i < 10; $i++) {
+            \App\Models\Book::factory()->create([
+                'isbn' => $faker->isbn13(),
+                'title' => $faker->words(asText: true),
+                'author' => $faker->name(),
+                'publisher' => $faker->lastName() . " Publishing",
+                'quantity' => $faker->numberBetween(0, 100),
+                'price' => $faker->numberBetween(100, 100000)
+            ]);
+        }
     }
 }

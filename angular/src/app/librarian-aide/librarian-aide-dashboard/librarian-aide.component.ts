@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../shared/auth.service';
 import User from '../../user';
 
@@ -13,9 +14,20 @@ import User from '../../user';
 export class LibrarianAideComponent implements OnInit {
   user: User | undefined;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.profileUser().subscribe((user) => (this.user = user));
+    this.authService.profileUser().subscribe({
+      next: (user: User) => {
+        this.user = user;
+      },
+      error: (err) => {
+        if (err.status == 401) {
+          this.router.navigate(['']);
+          return;
+        }
+        console.error(err);
+      },
+    });
   }
 }

@@ -8,7 +8,9 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
+import { AuthService } from '../../shared/auth.service';
 import User from '../../user';
 
 @Component({
@@ -31,18 +33,22 @@ export class AccountManagementComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private authService: AuthService,
+    private router: Router
   ) {
-    this.addUserForm = this.formBuilder.group({
-      name: '',
+    this.addUserForm = this.formBuilder.group<User>({
+      firstname: '',
+      lastname: '',
       id_number: '',
       email: '',
       password: '',
-      type: '',
+      type: 'borrower',
       contact: '',
     });
-    this.editUserForm = this.formBuilder.group({
-      name: '',
+    this.editUserForm = this.formBuilder.group<User>({
+      firstname: '',
+      lastname: '',
       id_number: '',
       email: '',
       password: '',
@@ -53,6 +59,17 @@ export class AccountManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    this.authService.profileUser().subscribe({
+      error: (err) => {
+        if (err.status == 401) {
+          this.router.navigate(['']);
+          return;
+        }
+
+        console.error(err);
+        this.alertComponent.addAlert('Failed to fetch user profile.', 'danger');
+      },
+    });
   }
 
   setDeleteUser(user: User) {
@@ -60,6 +77,7 @@ export class AccountManagementComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log(this.addUserForm.value);
     this.httpClient
       .post('http://localhost:8000/api/users/add', this.addUserForm.value)
       .subscribe({

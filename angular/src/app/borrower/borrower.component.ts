@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
+import { Router } from '@angular/router';
 import Book from '../book';
+import { AuthService } from '../shared/auth.service';
 import { GenerateQrPipe } from './generate-qr.pipe';
 
 @Component({
@@ -15,9 +17,24 @@ import { GenerateQrPipe } from './generate-qr.pipe';
 export class BorrowerComponent implements OnInit {
   books: Book[] = [];
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.authService.profileUser().subscribe({
+      error: (err) => {
+        if (err.status == 401) {
+          this.router.navigate(['']);
+          return;
+        }
+
+        console.error(err);
+      },
+    });
+
     this.getBooks();
   }
 
