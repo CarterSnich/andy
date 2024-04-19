@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'email' => 'librarian@example.com',
             'type' => 'librarian',
-            'contact' => '09212734764'
+            'contact' => '09212734764',
         ]);
 
         \App\Models\User::factory()->create([
@@ -46,17 +46,26 @@ class DatabaseSeeder extends Seeder
             'contact' => '09123456789'
         ]);
 
+        \App\Models\User::factory()->create([
+            'firstname' => 'Sofia',
+            'lastname' => 'Miakova',
+            'id_number' => '7654321',
+            'password' => Hash::make('password'),
+            'email' => 'deactivated@example.com',
+            'type' => 'borrower',
+            'contact' => '09000000000',
+            'is_deactivated' => true
+        ]);
 
-        $faker = fake();
-
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 25; $i++) {
             \App\Models\Book::factory()->create([
-                'isbn' => $faker->isbn13(),
-                'title' => $faker->words(asText: true),
-                'author' => $faker->name(),
-                'publisher' => $faker->lastName() . " Publishing",
-                'quantity' => $faker->numberBetween(0, 100),
-                'price' => $faker->numberBetween(100, 100000)
+                'isbn' => fake()->isbn13(),
+                'title' => str()->title(fake()->words(asText: true)),
+                'author' => fake()->name(),
+                'publisher' => fake()->lastName() . " Publishing",
+                'quantity' => fake()->numberBetween(0, 100),
+                'price' => fake()->numberBetween(100, 100000),
+                'is_deleted' => fake()->boolean()
             ]);
         }
     }

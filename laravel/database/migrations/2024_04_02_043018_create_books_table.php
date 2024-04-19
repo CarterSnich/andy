@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('publisher');
             $table->unsignedInteger('quantity');
             $table->unsignedBigInteger('price');
-
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

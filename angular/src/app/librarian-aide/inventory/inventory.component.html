@@ -108,7 +108,6 @@
               <td>{{ book.publisher }}</td>
               <td>{{ book.quantity }}</td>
               <td>P {{ book.price }}</td>
-
               <td>
                 <button
                   type="button"
@@ -121,13 +120,25 @@
                 </button>
                 <button
                   type="button"
-                  class="btn btn-sm btn-danger"
+                  class="btn btn-sm btn-secondary"
                   data-bs-toggle="modal"
-                  data-bs-target="#delete-modal"
-                  (click)="setDeleteBook(book)"
+                  data-bs-target="#deletion-modal"
+                  (click)="deletionBook = book"
+                  *ngIf="book.is_deleted; else deleteButton"
                 >
-                  Delete
+                  Restore
                 </button>
+                <ng-template #deleteButton>
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#deletion-modal"
+                    (click)="deletionBook = book"
+                  >
+                    Delete
+                  </button>
+                </ng-template>
               </td>
             </tr>
           </tbody>
@@ -207,11 +218,11 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="delete-modal" tabindex="-1">
+<div class="modal fade" id="deletion-modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5">Delete user</h1>
+        <h1 class="modal-title fs-5">Restore/delete book</h1>
         <button
           type="button"
           class="btn-close"
@@ -220,16 +231,17 @@
         ></button>
       </div>
       <div class="modal-body d-grid">
-        Are you sure to delete this book?
-        <span class="fs-4">{{ deleteBook?.title }}</span>
+        Are you sure to
+        {{ deletionBook?.is_deleted ? "restore" : "delete" }} this book?
+        <span class="fs-4">{{ deletionBook?.title }}</span>
       </div>
       <div class="modal-footer">
         <button
           class="btn btn-danger"
-          (click)="clickDeleteBook()"
+          (click)="clickDeletionBook()"
           data-bs-dismiss="modal"
         >
-          Delete
+          {{ deletionBook?.is_deleted ? "Restore" : "Delete" }}
         </button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">
           Cancel

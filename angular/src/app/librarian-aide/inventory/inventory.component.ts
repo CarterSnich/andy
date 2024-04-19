@@ -29,7 +29,7 @@ export class InventoryComponent implements OnInit {
   isEditting: string = '';
   user: User | undefined;
   searchQuery = new FormControl('');
-  deleteBook: Book | undefined;
+  deletionBook: Book | undefined;
 
   addBookForm: FormGroup = this.formBuilder.group<Book>({
     title: '',
@@ -79,10 +79,6 @@ export class InventoryComponent implements OnInit {
     this.getBooks();
   }
 
-  setDeleteBook(book: Book) {
-    this.deleteBook = book;
-  }
-
   getBooks() {
     this.httpClient.get<Book[]>('http://localhost:8000/api/books').subscribe({
       next: (books) => {
@@ -127,14 +123,23 @@ export class InventoryComponent implements OnInit {
       });
   }
 
-  clickDeleteBook() {
+  clickDeletionBook() {
     this.httpClient
-      .delete(`http://localhost:8000/api/books/${this.deleteBook?.id}/delete`)
+      .put(
+        `http://localhost:8000/api/books/${this.deletionBook?.id}/deletion`,
+        {
+          deletion: !this.deletionBook?.is_deleted,
+        }
+      )
       .subscribe({
         complete: () => {
+          this.alertComponent.addAlert(
+            `Book ${
+              this.deletionBook?.is_deleted ? 'restored' : 'deleted'
+            } successfully.`,
+            'success'
+          );
           this.getBooks();
-
-          this.alertComponent.addAlert(`Book deleted successfully.`, 'success');
         },
         error: (err) => {
           console.error(err);

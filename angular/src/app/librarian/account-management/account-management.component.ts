@@ -29,7 +29,7 @@ export class AccountManagementComponent implements OnInit {
   currentEditUserIdNumber = '';
   searchQuery = new FormControl('');
   previousUrl: string | null = null;
-  deleteUser: User | undefined;
+  activationUser: User | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,10 +72,6 @@ export class AccountManagementComponent implements OnInit {
     });
   }
 
-  setDeleteUser(user: User) {
-    this.deleteUser = user;
-  }
-
   onSubmit(): void {
     console.log(this.addUserForm.value);
     this.httpClient
@@ -95,31 +91,6 @@ export class AccountManagementComponent implements OnInit {
           }
           this.alertComponent.addAlert(
             `Failed to add user.${err_msg}`,
-            'danger'
-          );
-        },
-      });
-  }
-
-  clickDeleteUser() {
-    this.httpClient
-      .delete(
-        `http://localhost:8000/api/users/${this.deleteUser?.id_number}/delete`
-      )
-      .subscribe({
-        complete: () => {
-          this.getUsers();
-          this.alertComponent.addAlert('User deleted successfully.', 'success');
-        },
-        error: (err) => {
-          console.error(err);
-
-          let err_msg = '';
-          if (err.error.message) {
-            err_msg = ` ${err.error.message}`;
-          }
-          this.alertComponent.addAlert(
-            `Failed to delete user.${err_msg}`,
             'danger'
           );
         },
@@ -205,5 +176,38 @@ export class AccountManagementComponent implements OnInit {
     this.editUserForm = this.formBuilder.group(
       <User>this.users.find((user) => user.id_number === id_number)
     );
+  }
+
+  clickActivationUser() {
+    this.httpClient
+      .put(
+        `http://localhost:8000/api/users/${this.activationUser?.id_number}/activation`,
+        {
+          activation: !this.activationUser?.is_deactivated,
+        }
+      )
+      .subscribe({
+        complete: () => {
+          this.alertComponent.addAlert(
+            `User ${
+              !this.activationUser?.is_deactivated ? 'deactivated' : 'activated'
+            } successfully.`,
+            'success'
+          );
+          this.getUsers();
+        },
+        error: (err) => {
+          console.error(err);
+
+          let err_msg = '';
+          if (err.error.message) {
+            err_msg = ` ${err.error.message}`;
+          }
+          this.alertComponent.addAlert(
+            `Failed to delete user.${err_msg}`,
+            'danger'
+          );
+        },
+      });
   }
 }

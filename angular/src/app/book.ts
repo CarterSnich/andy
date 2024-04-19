@@ -6,6 +6,7 @@ interface Book {
   publisher: string;
   quantity: number;
   price: number;
+  is_deleted?: boolean;
 }
 
 export default Book;

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->set('type', ['librarian', 'borrower', 'librarian-aide']);
             $table->string('contact')->unique();
+            $table->boolean('is_deactivated')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -6,6 +6,7 @@ interface User {
   type: string;
   contact: string;
   password?: string;
+  is_deactivated?: boolean;
 }
 
 export default User;

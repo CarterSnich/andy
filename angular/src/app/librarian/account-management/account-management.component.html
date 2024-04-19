@@ -146,13 +146,25 @@
                 </button>
                 <button
                   type="button"
-                  class="btn btn-sm btn-danger"
+                  class="btn btn-sm btn-secondary"
                   data-bs-toggle="modal"
-                  data-bs-target="#delete-modal"
-                  (click)="setDeleteUser(user)"
+                  data-bs-target="#activation-modal"
+                  *ngIf="user.is_deactivated; else deactivateButton"
+                  (click)="this.activationUser = user"
                 >
-                  Delete
+                  Activate
                 </button>
+                <ng-template #deactivateButton>
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#activation-modal"
+                    (click)="this.activationUser = user"
+                  >
+                    Deactivate
+                  </button>
+                </ng-template>
               </td>
             </tr>
           </tbody>
@@ -256,11 +268,11 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="delete-modal" tabindex="-1">
+<div class="modal fade" id="activation-modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5">Delete user</h1>
+        <h1 class="modal-title fs-5">Deactivate/activate user</h1>
         <button
           type="button"
           class="btn-close"
@@ -269,18 +281,20 @@
         ></button>
       </div>
       <div class="modal-body d-grid">
-        Are you sure to delete this user?
+        Are you sure to
+        {{ activationUser?.is_deactivated ? "activate" : "deactivate" }} this
+        user?
         <span class="fs-4">
-          {{ deleteUser?.firstname + " " + deleteUser?.lastname }}
+          {{ activationUser?.firstname + " " + activationUser?.lastname }}
         </span>
       </div>
       <div class="modal-footer">
         <button
           class="btn btn-danger"
-          (click)="clickDeleteUser()"
+          (click)="clickActivationUser()"
           data-bs-dismiss="modal"
         >
-          Delete
+          {{ activationUser?.is_deactivated ? "Activate" : "Deactivate" }}
         </button>
         <button class="btn btn-secondary" data-bs-dismiss="modal">
           Cancel
