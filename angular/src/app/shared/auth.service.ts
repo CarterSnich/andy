@@ -22,6 +22,6 @@ export class AuthService {
   }
   // Signout user
   signout(): Observable<any> {
-    return this.http.get<any>('http://127.0.0.1:8000/api/auth/logout');
+    return this.http.delete<any>('http://127.0.0.1:8000/api/auth/logout');
   }
 }

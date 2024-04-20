@@ -30,4 +30,12 @@ export class LibrarianAideComponent implements OnInit {
       },
     });
   }
+
+  logout() {
+    this.authService.signout().subscribe({
+      complete: () => {
+        this.router.navigate(['']);
+      },
+    });
+  }
 }

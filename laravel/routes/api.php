@@ -52,6 +52,10 @@ Route::post('/auth/login', function (Request $request) {
     ]);
 });
 
+Route::middleware('auth:sanctum')->delete('/auth/logout', function (Request $request) {
+    $request->user()->currentAccessToken()->delete();
+});
+
 Route::post('/users/add', function (Request $request) {
     $new_user = $request->validate([
         'firstname' => [

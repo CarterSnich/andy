@@ -55,4 +55,12 @@ export class BorrowerComponent implements OnInit {
     event.target.children[0].classList.add('d-none');
     event.target.children[1].classList.remove('invisible');
   }
+
+  logout() {
+    this.authService.signout().subscribe({
+      complete: () => {
+        this.router.navigate(['']);
+      },
+    });
+  }
 }

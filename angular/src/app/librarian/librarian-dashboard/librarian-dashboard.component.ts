@@ -39,7 +39,6 @@ export class LibrarianDashboardComponent implements OnInit {
   logout() {
     this.authService.signout().subscribe({
       complete: () => {
-        console.log('logut');
         this.router.navigate(['']);
       },
     });
