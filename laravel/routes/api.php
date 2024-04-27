@@ -1,13 +1,14 @@
 <?php
 
 use App\Models\Book;
+use App\Models\BorrowedBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rule;
-
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 /*
 |--------------------------------------------------------------------------
@@ -171,6 +172,8 @@ Route::get('/users', function (Request $request) {
 
 Route::get('books', function (Request $request) {
     $keyword = $request->get('query');
+    $page = $request->get('page');
+
     if ($keyword) {
         return Book::where(function ($query) use ($keyword) {
             $query
@@ -178,9 +181,9 @@ Route::get('books', function (Request $request) {
                 ->orWhere('title', 'like', '%' . $keyword . '%')
                 ->orWhere('author', 'like', '%' . $keyword . '%')
                 ->orWhere('publisher', 'like', '%' . $keyword . '%');
-        })->get();
+        })->paginate(20);
     } else {
-        return Book::all();
+        return Book::paginate(20);
     }
 });
 
@@ -241,4 +244,24 @@ Route::put('books/{id}/update', function (Request $request, string $id) {
 
 Route::get('/auth/user-profile', function (Request $request) {
     return $request->user();
+})->middleware('auth:sanctum');
+
+
+Route::get('borrowed-books', function () {
+    return BorrowedBook::all();
+})->middleware('auth:sanctum');
+
+Route::post('/borrowed-books/borrow/{book}', function (Request $request, Book $book) {
+    $book_id = $book->id;
+    $borrower_id = $request->user()->id;
+
+    BorrowedBook::create([
+        'book_id' => $book_id,
+        'borrower_id' => $borrower_id,
+    ]);
+})->middleware('auth:sanctum');
+
+Route::patch('borrowed-books/{borrowed_book}/approve', function (Request $request, BorrowedBook $borrowed_book) {
+    $borrowed_book->is_approved = true;
+    $borrowed_book->save();
 })->middleware('auth:sanctum');

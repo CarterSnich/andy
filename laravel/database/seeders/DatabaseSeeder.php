@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
             'is_deactivated' => true
         ]);
 
-        for ($i = 0; $i < 25; $i++) {
+        for ($i = 0; $i < 10000; $i++) {
             \App\Models\Book::factory()->create([
                 'isbn' => fake()->isbn13(),
                 'title' => str()->title(fake()->words(asText: true)),
