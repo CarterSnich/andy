@@ -5,19 +5,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertComponent } from '../alert/alert.component';
 import Book from '../book';
+import Page from '../page';
 import { AuthService } from '../shared/auth.service';
 import User from '../user';
 import { GenerateQrPipe } from './generate-qr.pipe';
-
-interface Page {
-  current_page: number;
-  data: Book[];
-  from: number;
-  last_page: number;
-  per_page: number;
-  to: number;
-  total: number;
-}
 
 @Component({
   selector: 'app-dashboard',
@@ -32,6 +23,18 @@ export class BorrowerComponent implements OnInit {
   page: Page | undefined;
   books: Book[] = [];
   user: User | undefined;
+  isFetchingBooks = false;
+
+  options = {
+    root: document.querySelector('#scrollable'),
+    rootMargin: '0px',
+    threshold: 0.5,
+  };
+
+  observer = new IntersectionObserver((entries, observer) => {
+    console.log('obeserved something');
+    this.getBooks();
+  }, this.options);
 
   constructor(
     private httpClient: HttpClient,
@@ -40,6 +43,7 @@ export class BorrowerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.observer.observe(<HTMLElement>document.querySelector('#target'));
     this.authService.profileUser().subscribe({
       error: (err) => {
         if (err.status == 401) {
@@ -52,15 +56,31 @@ export class BorrowerComponent implements OnInit {
     });
 
     this.authService.profileUser().subscribe((user) => (this.user = user));
-    this.getBooks();
+    // this.getBooks();
   }
 
   getBooks() {
+    console.log('fetching');
+    if (this.isFetchingBooks) {
+      console.log('already fetching');
+      return;
+    }
+    this.isFetchingBooks = true;
+
+    let current_page = this.page ? this.page.current_page : 0;
+
     this.httpClient
-      .get<Page>('http://localhost:8000/api/books?page=1')
-      .subscribe((page) => {
-        this.page = page;
-        this.books = page.data;
+      .get<Page>(`http://localhost:8000/api/books?page=${current_page + 1}`)
+      .subscribe({
+        next: (page) => {
+          this.page = page;
+          this.books.push(...page.data);
+        },
+        complete: () => {
+          this.isFetchingBooks = false;
+          console.log('done fetching');
+        },
+        error(err) {},
       });
   }
 

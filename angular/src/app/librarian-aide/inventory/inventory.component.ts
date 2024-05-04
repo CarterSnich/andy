@@ -11,6 +11,7 @@ import {
 import { Router } from '@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
 import Book from '../../book';
+import Page from '../../page';
 import { AuthService } from '../../shared/auth.service';
 import User from '../../user';
 
@@ -25,6 +26,8 @@ export class InventoryComponent implements OnInit {
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
 
   previousUrl: string | undefined;
+  page: Page | undefined = undefined;
+  isFetchingBooks = false;
   books: Book[] | undefined;
   isEditting: string = '';
   user: User | undefined;
@@ -46,6 +49,8 @@ export class InventoryComponent implements OnInit {
     quantity: 0,
     price: 0,
   });
+
+  currentPageControl = new FormControl(this.page?.current_page || 1);
 
   constructor(
     private httpClient: HttpClient,
@@ -80,23 +85,36 @@ export class InventoryComponent implements OnInit {
   }
 
   getBooks() {
-    this.httpClient.get<Book[]>('http://localhost:8000/api/books').subscribe({
-      next: (books) => {
-        this.books = books;
-      },
-      error: (err) => {
-        console.error(err);
+    if (!this.isFetchingBooks) {
+      this.isFetchingBooks = true;
 
-        let err_msg = '';
-        if (err.error.message) {
-          err_msg = ` ${err.error.message}`;
-        }
-        this.alertComponent.addAlert(
-          `Failed to fetch books.${err_msg}`,
-          'danger'
-        );
-      },
-    });
+      let url = this.searchQuery.value
+        ? `http://localhost:8000/api/books?query=${this.searchQuery.value}&?page=${this.currentPageControl.value}`
+        : `http://localhost:8000/api/books?page=${this.currentPageControl.value}`;
+
+      this.httpClient.get<Page>(url).subscribe({
+        next: (page) => {
+          console.log(page);
+          this.page = page;
+          this.books = page.data;
+        },
+        complete: () => {
+          this.isFetchingBooks = false;
+        },
+        error: (err) => {
+          console.error(err);
+
+          let err_msg = '';
+          if (err.error.message) {
+            err_msg = ` ${err.error.message}`;
+          }
+          this.alertComponent.addAlert(
+            `Failed to fetch books.${err_msg}`,
+            'danger'
+          );
+        },
+      });
+    }
   }
 
   addBook() {
@@ -184,33 +202,5 @@ export class InventoryComponent implements OnInit {
           );
         },
       });
-  }
-
-  searchBooks() {
-    if (this.searchQuery.value) {
-      this.httpClient
-        .get<Book[]>(
-          `http://localhost:8000/api/books?query=${this.searchQuery.value}`
-        )
-        .subscribe({
-          next: (books) => {
-            this.books = books;
-          },
-          error: (err) => {
-            console.error(err);
-
-            let err_msg = '';
-            if (err.error.message) {
-              err_msg = ` ${err.error.message}`;
-            }
-            this.alertComponent.addAlert(
-              `Failed to fetch books.${err_msg}`,
-              'danger'
-            );
-          },
-        });
-    } else {
-      this.getBooks();
-    }
   }
 }

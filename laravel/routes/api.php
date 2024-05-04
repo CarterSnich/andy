@@ -172,8 +172,6 @@ Route::get('/users', function (Request $request) {
 
 Route::get('books', function (Request $request) {
     $keyword = $request->get('query');
-    $page = $request->get('page');
-
     if ($keyword) {
         return Book::where(function ($query) use ($keyword) {
             $query
@@ -181,9 +179,9 @@ Route::get('books', function (Request $request) {
                 ->orWhere('title', 'like', '%' . $keyword . '%')
                 ->orWhere('author', 'like', '%' . $keyword . '%')
                 ->orWhere('publisher', 'like', '%' . $keyword . '%');
-        })->paginate(20);
+        })->orderBy('author')->paginate(20);
     } else {
-        return Book::paginate(20);
+        return Book::orderBy('author')->paginate(20);
     }
 });
 
