@@ -32,15 +32,26 @@
       class="nav flex-column text-center shadow h-100 gap-5 py-5"
       style="min-width: 300px"
     >
-      <a class="nav-link fw-bold text-black" href="librarian">Home</a>
-      <a class="nav-link fw-bold text-black" href="account-management">
+    
+    <a
+    class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+    href="#"
+  >
+    <img src="../../assets/images/home.png" height="24" />
+    Home
+  </a>
+      <a class="nav-link fw-bold text-black  d-flex align-items-center gap-3 " href="account-management">
+         <img src="../../assets/images/inventory.jpg" height="24" />
         Account Management
       </a>
-      <a class="nav-link fw-bold text-black" href="librarian"
-        >Lost and Damage</a
-      >
-      <a class="nav-link fw-bold text-black" href="transaction">Transaction</a>
-      <a class="nav-link fw-bold text-black mb-auto" href="librarian">About</a>
+      
+      <a class="nav-link fw-bold text-black d-flex align-items-center gap-3 " href="transaction">
+        <img src="../../assets/images/reports.png" height="24" />
+        Reports</a>
+
+      <a class="nav-link fw-bold text-black mb-auto d-flex align-items-center gap-3 " href="librarian">
+        <img src="../../assets/images/about.jpg" height="24" />
+        About</a>
       <button (click)="logout()" class="nav-link text-danger fw-bold">
         Logout
       </button>
@@ -49,83 +60,27 @@
     <div class="container">
       <div class="row row-cols-3 p-5 g-3">
         <div class="col">
-          <a
-            href="librarian"
-            class="card py-5 px-0 text-decoration-none"
-            style="background-color: #002862"
-          >
-            <div class="card-body">
-              <h5 class="card-title text-center fs-3 text-light">
-                REGISTERED ACCOUNT
-              </h5>
+          <div class="card text-bg-success mb-3" style="max-width: 18rem">
+            <div class="card-body d-flex align-items-center shadow">
+              <img src="../../../assets/images/book (3) 1.png" height="128" />
+              <span class="fs-4 fw-bold">Total List of Books</span>
             </div>
-          </a>
+            <div class="card-footer text-center">More Info</div>
+          </div>
         </div>
         <div class="col">
-          <a
-            href="total_list_books"
-            class="card py-5 px-0 text-decoration-none"
-            style="background-color: #002862"
-          >
-            <div class="card-body">
-              <h5 class="card-title text-center fs-3 text-light">
-                TOTAL LIST OF BOOKS
-              </h5>
+          <div class="card text-bg-danger mb-3" style="max-width: 18rem">
+            <div class="card-body d-flex align-items-center shadow">
+              <img src="../../../assets/images/userbg.png" height="128" />
+              <span class="fs-4 fw-bold">User Accounts</span>
             </div>
-          </a>
+            <div class="card-footer text-center">More Info</div>
+          </div>
         </div>
-        <div class="col">
-          <a
-            href="librarian"
-            class="card py-5 px-0 text-decoration-none"
-            style="background-color: #002862"
-          >
-            <div class="card-body">
-              <h5 class="card-title text-center fs-3 text-light">
-                AVAILABLE<br />BOOKS
-              </h5>
-            </div>
-          </a>
-        </div>
-        <div class="col">
-          <a
-            href="librarian"
-            class="card py-5 px-0 text-decoration-none"
-            style="background-color: #002862"
-          >
-            <div class="card-body">
-              <h5 class="card-title text-center fs-3 text-light">
-                TOTAL ISSUED BOOKS
-              </h5>
-            </div>
-          </a>
-        </div>
-        <div class="col">
-          <a
-            href="librarian"
-            class="card py-5 px-0 text-decoration-none"
-            style="background-color: #002862"
-          >
-            <div class="card-body">
-              <h5 class="card-title text-center fs-3 text-light">
-                TOTAL RETURNED BOOKS
-              </h5>
-            </div>
-          </a>
-        </div>
-        <div class="col">
-          <a
-            href="librarian"
-            class="card py-5 px-0 text-decoration-none"
-            style="background-color: #002862"
-          >
-            <div class="card-body">
-              <h5 class="card-title text-center fs-3 text-light">
-                NOT-RETURNED BOOKS
-              </h5>
-            </div>
-          </a>
-        </div>
+  
+        
+        
+        
       </div>
     </div>
   </div>

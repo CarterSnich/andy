@@ -1,0 +1,24 @@
+.nav-link fw-bold text-black{
+    left:50%;
+}
+
+.more-book {
+    position: absolute;
+    top: 373px;
+    left: 424px;
+    background-color: #aaff00;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) inset;
+    width: 293px;
+    height: 50px;
+  }
+  
+  .s-books {
+    position: absolute;
+    top: 202px;
+    left: 424px;
+    background-color: #aaff00;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25),
+      0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
+    width: 293px;
+    height: 195px;
+  }

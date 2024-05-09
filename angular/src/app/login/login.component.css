@@ -1,11 +1,21 @@
 #component {
-  background-image: url("../../assets/images/21.jpg");
+  background-image: url("../../assets/images/bg.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
-.bar {
-  height: 5rem;
-  background-color: #002862;
+.h4 {
+  margin: 10rem auto 0;
+
 }
+
+.mt-auto {
+  margin-top: auto;
+  margin-bottom: 40px; 
+}
+
+
+
+
+
