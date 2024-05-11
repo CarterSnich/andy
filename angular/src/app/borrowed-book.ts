@@ -5,6 +5,7 @@ interface BorrowedBook {
   id: number;
   book: Book;
   borrower: User;
+  quantity: number;
   is_approved: boolean;
   is_returned: boolean;
   borrowed_date: string;

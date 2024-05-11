@@ -172,6 +172,8 @@ Route::get('/users', function (Request $request) {
 
 Route::get('books', function (Request $request) {
     $keyword = $request->get('query');
+    $perPage = $request->get('perPage', 20);
+
     if ($keyword) {
         return Book::where(function ($query) use ($keyword) {
             $query
@@ -179,9 +181,9 @@ Route::get('books', function (Request $request) {
                 ->orWhere('title', 'like', '%' . $keyword . '%')
                 ->orWhere('author', 'like', '%' . $keyword . '%')
                 ->orWhere('publisher', 'like', '%' . $keyword . '%');
-        })->orderBy('author')->paginate(20);
+        })->orderBy('author')->paginate($perPage);
     } else {
-        return Book::orderBy('author')->paginate(20);
+        return Book::orderBy('author')->paginate($perPage);
     }
 });
 
@@ -245,21 +247,30 @@ Route::get('/auth/user-profile', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::get('borrowed-books', function () {
+Route::get('/borrowed-books', function () {
     return BorrowedBook::all();
+})->middleware('auth:sanctum');
+
+
+Route::get('/borrowed-books/user', function (Request $request) {
+    $borrower = $request->user();
+    return BorrowedBook::where('borrower_id', $borrower->id)->get();
 })->middleware('auth:sanctum');
 
 Route::post('/borrowed-books/borrow/{book}', function (Request $request, Book $book) {
     $book_id = $book->id;
     $borrower_id = $request->user()->id;
+    $quantity = $request->quantity;
+
 
     BorrowedBook::create([
         'book_id' => $book_id,
         'borrower_id' => $borrower_id,
+        'quantity' => $quantity
     ]);
 })->middleware('auth:sanctum');
 
-Route::patch('borrowed-books/{borrowed_book}/approve', function (Request $request, BorrowedBook $borrowed_book) {
-    $borrowed_book->is_approved = true;
+Route::patch('borrowed-books/{borrowed_book}/return', function (Request $request, BorrowedBook $borrowed_book) {
+    $borrowed_book->is_returned = true;
     $borrowed_book->save();
 })->middleware('auth:sanctum');

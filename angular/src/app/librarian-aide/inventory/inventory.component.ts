@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -11,28 +10,41 @@ import {
 import { Router } from '@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
 import Book from '../../book';
-import Page from '../../page';
+import Pagination from '../../pagination';
 import { AuthService } from '../../shared/auth.service';
 import User from '../../user';
 
 @Component({
   selector: 'app-inventory',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, AlertComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AlertComponent,
+    ReactiveFormsModule,
+  ],
   templateUrl: './inventory.component.html',
   styleUrl: './inventory.component.css',
 })
 export class InventoryComponent implements OnInit {
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
 
-  previousUrl: string | undefined;
-  page: Page | undefined = undefined;
-  isFetchingBooks = false;
-  books: Book[] | undefined;
+  pagination: Pagination = {
+    current_page: 1,
+    data: [],
+    from: 0,
+    last_page: 0,
+    per_page: 20,
+    to: 0,
+    total: 0,
+  };
+  books: Book[] = [];
   isEditting: string = '';
-  user: User | undefined;
-  searchQuery = new FormControl('');
-  deletionBook: Book | undefined;
+  user?: User;
+  searchQuery = '';
+
+  deletionBook?: Book;
 
   addBookForm: FormGroup = this.formBuilder.group<Book>({
     title: '',
@@ -50,8 +62,6 @@ export class InventoryComponent implements OnInit {
     price: 0,
   });
 
-  currentPageControl = new FormControl(this.page?.current_page || 1);
-
   constructor(
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
@@ -63,7 +73,6 @@ export class InventoryComponent implements OnInit {
     this.authService.profileUser().subscribe({
       next: (user) => {
         this.user = user;
-        this.previousUrl = user.type;
       },
       error: (err) => {
         if (err.status == 401) {
@@ -81,40 +90,40 @@ export class InventoryComponent implements OnInit {
         );
       },
     });
-    this.getBooks();
+    this.getBooks(this.pagination.current_page, this.pagination.per_page);
   }
 
-  getBooks() {
-    if (!this.isFetchingBooks) {
-      this.isFetchingBooks = true;
+  getBooks(page: number, perPage: number) {
+    let url = `http://localhost:8000/api/books?page=${page}&perPage=${perPage}`;
+    if (this.searchQuery.length) url = `${url}&query=${this.searchQuery}`;
 
-      let url = this.searchQuery.value
-        ? `http://localhost:8000/api/books?query=${this.searchQuery.value}&?page=${this.currentPageControl.value}`
-        : `http://localhost:8000/api/books?page=${this.currentPageControl.value}`;
+    this.httpClient.get<Pagination>(url).subscribe({
+      next: (pagination) => {
+        this.pagination = pagination;
+        this.books = pagination.data;
+      },
+      error: (err) => {
+        console.error(err);
 
-      this.httpClient.get<Page>(url).subscribe({
-        next: (page) => {
-          console.log(page);
-          this.page = page;
-          this.books = page.data;
-        },
-        complete: () => {
-          this.isFetchingBooks = false;
-        },
-        error: (err) => {
-          console.error(err);
+        let err_msg = '';
+        if (err.error.message) {
+          err_msg = ` ${err.error.message}`;
+        }
+        this.alertComponent.addAlert(
+          `Failed to fetch books.${err_msg}`,
+          'danger'
+        );
+      },
+    });
+  }
 
-          let err_msg = '';
-          if (err.error.message) {
-            err_msg = ` ${err.error.message}`;
-          }
-          this.alertComponent.addAlert(
-            `Failed to fetch books.${err_msg}`,
-            'danger'
-          );
-        },
-      });
-    }
+  searchBook() {
+    this.getBooks(this.pagination.current_page, this.pagination.per_page);
+  }
+
+  clearSearch() {
+    this.searchQuery = '';
+    this.getBooks(this.pagination.current_page, this.pagination.per_page);
   }
 
   addBook() {
@@ -124,7 +133,7 @@ export class InventoryComponent implements OnInit {
         complete: () => {
           this.alertComponent.addAlert(`Book added successfully.`, 'success');
           this.addBookForm.reset();
-          this.getBooks();
+          this.getBooks(this.pagination.current_page, this.pagination.per_page);
         },
         error: (err) => {
           console.error(err);
@@ -157,7 +166,7 @@ export class InventoryComponent implements OnInit {
             } successfully.`,
             'success'
           );
-          this.getBooks();
+          this.getBooks(this.pagination.current_page, this.pagination.per_page);
         },
         error: (err) => {
           console.error(err);
@@ -186,7 +195,7 @@ export class InventoryComponent implements OnInit {
       )
       .subscribe({
         complete: () => {
-          this.getBooks();
+          this.getBooks(this.pagination.current_page, this.pagination.per_page);
           this.alertComponent.addAlert(`Book updated successfully.`, 'success');
         },
         error: (err) => {
@@ -202,5 +211,18 @@ export class InventoryComponent implements OnInit {
           );
         },
       });
+  }
+
+  prevPage() {
+    this.getBooks(this.pagination.current_page - 1, this.pagination.per_page);
+  }
+
+  nextPage() {
+    this.getBooks(this.pagination.current_page + 1, this.pagination.per_page);
+  }
+
+  pageSelect(event: any) {
+    const perPage: number = event.target.value;
+    this.getBooks(this.pagination.current_page, perPage);
   }
 }

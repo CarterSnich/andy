@@ -21,7 +21,6 @@
       <img
         src="../../../assets/images/220px-LNUTaclobanLogo-removebg-preview.png"
         height="64"
-        class=""
       />
       <h1 class="text-light">Library Management System</h1>
     </div>
@@ -32,26 +31,42 @@
       class="nav flex-column text-center shadow h-100 gap-5 py-5"
       style="min-width: 300px"
     >
-    
-    <a
-    class="nav-link fw-bold text-black d-flex align-items-center gap-3"
-    href="#"
-  >
-    <img src="../../assets/images/home.png" height="24" />
-    Home
-  </a>
-      <a class="nav-link fw-bold text-black  d-flex align-items-center gap-3 " href="account-management">
-         <img src="../../assets/images/inventory.jpg" height="24" />
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        routerLink="/{{ user?.type }}"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        Home
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        routerLink="/account-management"
+      >
+        <img src="../../assets/images/inventory.jpg" height="24" />
         Account Management
       </a>
-      
-      <a class="nav-link fw-bold text-black d-flex align-items-center gap-3 " href="transaction">
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        routerLink="/transactions"
+      >
+        <img src="../../assets/images/borrowlist.jpg" height="24" />
+        Transactions
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        routerLink="/transaction"
+      >
         <img src="../../assets/images/reports.png" height="24" />
-        Reports</a>
+        Reports
+      </a>
 
-      <a class="nav-link fw-bold text-black mb-auto d-flex align-items-center gap-3 " href="librarian">
+      <a
+        class="nav-link fw-bold text-black mb-auto d-flex align-items-center gap-3"
+        routerLink="/librarian"
+      >
         <img src="../../assets/images/about.jpg" height="24" />
-        About</a>
+        About
+      </a>
       <button (click)="logout()" class="nav-link text-danger fw-bold">
         Logout
       </button>
@@ -60,27 +75,31 @@
     <div class="container">
       <div class="row row-cols-3 p-5 g-3">
         <div class="col">
-          <div class="card text-bg-success mb-3" style="max-width: 18rem">
+          <a
+            routerLink="/inventory"
+            class="card text-bg-success mb-3 text-decoration-none"
+            style="max-width: 18rem"
+          >
             <div class="card-body d-flex align-items-center shadow">
               <img src="../../../assets/images/book (3) 1.png" height="128" />
               <span class="fs-4 fw-bold">Total List of Books</span>
             </div>
             <div class="card-footer text-center">More Info</div>
-          </div>
+          </a>
         </div>
         <div class="col">
-          <div class="card text-bg-danger mb-3" style="max-width: 18rem">
+          <a
+            routerLink="/account-management"
+            class="card text-bg-danger mb-3 text-decoration-none"
+            style="max-width: 18rem"
+          >
             <div class="card-body d-flex align-items-center shadow">
               <img src="../../../assets/images/userbg.png" height="128" />
               <span class="fs-4 fw-bold">User Accounts</span>
             </div>
             <div class="card-footer text-center">More Info</div>
-          </div>
+          </a>
         </div>
-  
-        
-        
-        
       </div>
     </div>
   </div>

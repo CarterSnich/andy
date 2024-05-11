@@ -1,13 +1,9 @@
-import Book from './book';
-
-interface Page {
+export default interface Pagination {
   current_page: number;
-  data: Book[];
+  data: any;
   from: number;
   last_page: number;
   per_page: number;
   to: number;
   total: number;
 }
-
-export default Page;

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('book_id');
             $table->unsignedBigInteger('borrower_id');
+            $table->unsignedInteger('quantity');
             $table->boolean('is_approved')->default(false);
             $table->boolean('is_returned')->default(false);
             $table->date('borrowed_date')->default(Carbon::now());

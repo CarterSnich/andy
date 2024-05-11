@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { AlertComponent } from '../alert/alert.component';
 import Book from '../book';
-import Page from '../page';
+import Page from '../pagination';
 import { AuthService } from '../shared/auth.service';
 import User from '../user';
 import { GenerateQrPipe } from './generate-qr.pipe';
@@ -13,7 +14,13 @@ import { GenerateQrPipe } from './generate-qr.pipe';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, GenerateQrPipe, AlertComponent],
+  imports: [
+    CommonModule,
+    GenerateQrPipe,
+    AlertComponent,
+    FormsModule,
+    RouterLink,
+  ],
   templateUrl: './borrower.component.html',
   styleUrl: './borrower.component.css',
 })
@@ -25,6 +32,9 @@ export class BorrowerComponent implements OnInit {
   user: User | undefined;
   isFetchingBooks = false;
 
+  bookToBorrow?: Book;
+  bookQuantity = 1;
+
   options = {
     root: document.querySelector('#scrollable'),
     rootMargin: '0px',
@@ -32,7 +42,6 @@ export class BorrowerComponent implements OnInit {
   };
 
   observer = new IntersectionObserver((entries, observer) => {
-    console.log('obeserved something');
     this.getBooks();
   }, this.options);
 
@@ -88,39 +97,31 @@ export class BorrowerComponent implements OnInit {
     return new Array(n);
   }
 
-  onEnter(event: any) {
-    event.target.children[0].classList.remove('d-none');
-    event.target.children[1].classList.add('invisible');
+  borrowBook() {
+    const url = `http://localhost:8000/api/borrowed-books/borrow/${this.bookToBorrow?.id}`;
+    const body = { quantity: this.bookQuantity };
+
+    this.httpClient.post(url, body).subscribe({
+      complete: () => {
+        this.alertComponent.addAlert(`Book borrowed successfully.`, 'success');
+      },
+      error: (err) => {
+        console.error(err);
+
+        let err_msg = '';
+        if (err.error.message) {
+          err_msg = ` ${err.error.message}`;
+        }
+        this.alertComponent.addAlert(
+          `Failed to borrow book.${err_msg}`,
+          'danger'
+        );
+      },
+    });
   }
 
-  onLeave(event: any) {
-    event.target.children[0].classList.add('d-none');
-    event.target.children[1].classList.remove('invisible');
-  }
-
-  borrowBook(book: Book) {
-    this.httpClient
-      .post(`http://localhost:8000/api/borrowed-books/borrow/${book.id}`, book)
-      .subscribe({
-        complete: () => {
-          this.alertComponent.addAlert(
-            `Book borrowed successfully.`,
-            'success'
-          );
-        },
-        error: (err) => {
-          console.error(err);
-
-          let err_msg = '';
-          if (err.error.message) {
-            err_msg = ` ${err.error.message}`;
-          }
-          this.alertComponent.addAlert(
-            `Failed to borrow book.${err_msg}`,
-            'danger'
-          );
-        },
-      });
+  clickBook(book: Book) {
+    this.bookToBorrow = book;
   }
 
   logout() {

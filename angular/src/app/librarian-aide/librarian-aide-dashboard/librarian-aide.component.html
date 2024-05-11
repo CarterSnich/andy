@@ -32,38 +32,30 @@
       class="nav flex-column text-center shadow h-100 gap-3 py-3"
       style="min-width: 300px"
     >
-        <a
-          class="nav-link fw-bold text-black d-flex align-items-center gap-3"
-          href="#"
-        >
-          <img src="../../assets/images/home.png" height="24" />
-          Home
-        </a>
       <a
         class="nav-link fw-bold text-black d-flex align-items-center gap-3"
-        href="inventory"
+        routerLink="/{{ user?.type }}"
+      >
+        <img src="../../assets/images/home.png" height="24" />
+        Home
+      </a>
+      <a
+        class="nav-link fw-bold text-black d-flex align-items-center gap-3"
+        routerLink="/inventory"
       >
         <img src="../../assets/images/inventory.jpg" height="24" />
         Inventory
       </a>
-      <a class="nav-link fw-bold text-black d-flex align-items-center gap-3 " href="transaction">
-        <img src="../../assets/images/reports.png" height="24" />
-        Borrowed Books</a>
       <a
         class="nav-link fw-bold text-black d-flex align-items-center gap-3"
-        href="#"
+        routerLink="/transaction"
       >
-        <img src="../../assets/images/return.jpg" height="24" />
-        Return List
-      </a>
-      
-      
-      
-      
-
+        <img src="../../assets/images/reports.png" height="24" />
+        Borrowed Books</a
+      >
       <a
         class="nav-link fw-bold text-black d-flex align-items-center gap-3 mb-auto"
-        href="#"
+        routerLink="/about"
       >
         <img src="../../assets/images/about.jpg" height="24" />
         About
@@ -97,11 +89,7 @@
             <div class="card-footer text-center">More Info</div>
           </div>
         </div>
-        
       </div>
-
-      
-      
     </div>
   </div>
 </div>

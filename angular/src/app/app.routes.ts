@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { BorrowedBooksComponent } from './borrowed-books/borrowed-books.component';
 import { BorrowerComponent } from './borrower/borrower.component';
 import { InventoryComponent } from './librarian-aide/inventory/inventory.component';
 import { LibrarianAideComponent } from './librarian-aide/librarian-aide-dashboard/librarian-aide.component';
@@ -19,6 +20,11 @@ export const routes: Routes = [
   {
     path: 'borrower',
     component: BorrowerComponent,
+    title: 'LIBRARY MANAGEMENT SYSTEM',
+  },
+  {
+    path: 'borrowed-books',
+    component: BorrowedBooksComponent,
     title: 'LIBRARY MANAGEMENT SYSTEM',
   },
   {
@@ -47,7 +53,7 @@ export const routes: Routes = [
     title: 'LIBRARY MANAGEMENT SYSTEM',
   },
   {
-    path: 'transaction',
+    path: 'transactions',
     component: TransactionComponent,
     title: 'LIBRARY MANAGEMENT SYSTEM',
   },

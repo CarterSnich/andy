@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../shared/auth.service';
 import User from '../../user';
 
 @Component({
   selector: 'app-librarian-aide',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './librarian-aide.component.html',
   styleUrl: './librarian-aide.component.css',
 })

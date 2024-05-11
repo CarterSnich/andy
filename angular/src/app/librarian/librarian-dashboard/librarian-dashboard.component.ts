@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
 import { AuthService } from '../../shared/auth.service';
 import User from '../../user';
@@ -7,7 +7,7 @@ import User from '../../user';
 @Component({
   selector: 'app-librarian-dashboard',
   standalone: true,
-  imports: [RouterModule, AlertComponent],
+  imports: [RouterModule, AlertComponent, RouterLink],
   templateUrl: './librarian-dashboard.component.html',
   styleUrl: './librarian-dashboard.component.css',
 })

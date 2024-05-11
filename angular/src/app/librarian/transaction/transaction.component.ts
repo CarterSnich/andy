@@ -1,22 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
 import BorrowedBook from '../../borrowed-book';
 import { AuthService } from '../../shared/auth.service';
+import User from '../../user';
 
 @Component({
   selector: 'app-transaction',
   standalone: true,
-  imports: [CommonModule, AlertComponent],
+  imports: [CommonModule, AlertComponent, RouterLink],
   templateUrl: './transaction.component.html',
   styleUrl: './transaction.component.css',
 })
 export class TransactionComponent implements OnInit {
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
 
+  user?: User;
   borrowedBooks: BorrowedBook[] = [];
+  bookToReturn?: BorrowedBook;
 
   constructor(
     private authService: AuthService,
@@ -26,6 +29,9 @@ export class TransactionComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.profileUser().subscribe({
+      next: (user) => {
+        this.user = user;
+      },
       error: (err) => {
         if (err.status == 401) {
           this.router.navigate(['']);
@@ -46,15 +52,20 @@ export class TransactionComponent implements OnInit {
       });
   }
 
-  approve(borrowedBook: BorrowedBook) {
+  clickReturn(bb: BorrowedBook) {
+    this.bookToReturn = bb;
+  }
+
+  returnBook() {
+    let bb = <BorrowedBook>this.bookToReturn;
     this.httpClient
-      .patch(
-        `http://localhost:8000/api/borrowed-books/${borrowedBook.id}/approve`,
-        null
-      )
+      .patch(`http://localhost:8000/api/borrowed-books/${bb.id}/return`, null)
       .subscribe({
         complete: () => {
-          this.alertComponent.addAlert(`Pending borrow approved.`, 'success');
+          this.alertComponent.addAlert(
+            `Book returned successfully.`,
+            'success'
+          );
           this.getBorrowedBooks();
         },
         error: (err) => {
@@ -65,7 +76,7 @@ export class TransactionComponent implements OnInit {
             err_msg = ` ${err.error.message}`;
           }
           this.alertComponent.addAlert(
-            `Failed to approve pending borrow.${err_msg}`,
+            `Failed to mark as returned.${err_msg}`,
             'danger'
           );
         },

@@ -8,7 +8,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
 import { AuthService } from '../../shared/auth.service';
 import User from '../../user';
@@ -16,12 +16,19 @@ import User from '../../user';
 @Component({
   selector: 'app-account-management',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, AlertComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AlertComponent,
+    RouterLink,
+  ],
   templateUrl: './account-management.component.html',
   styleUrl: './account-management.component.css',
 })
 export class AccountManagementComponent implements OnInit {
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
+  user?: User;
 
   users: User[] = [];
   addUserForm: FormGroup;
@@ -58,8 +65,10 @@ export class AccountManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUsers();
     this.authService.profileUser().subscribe({
+      next: (user) => {
+        this.user = user;
+      },
       error: (err) => {
         if (err.status == 401) {
           this.router.navigate(['']);
@@ -70,6 +79,8 @@ export class AccountManagementComponent implements OnInit {
         this.alertComponent.addAlert('Failed to fetch user profile.', 'danger');
       },
     });
+
+    this.getUsers();
   }
 
   onSubmit(): void {
